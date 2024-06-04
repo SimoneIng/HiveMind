@@ -15,9 +15,9 @@ app.use(cors())
 
 // routes 
 app.use(authRouter)
+app.use(ideasRouter)
 app.use(commentsRouter)
 app.use(usersRouter)
-app.use(ideasRouter)
 app.use(feedbacksRouter)
 
 // default error handler 
