@@ -1,9 +1,10 @@
 import { User } from "../models/index.js";
 import { JWT_SECRET } from '../config/environment.js'; 
 import jwt from 'jsonwebtoken'; 
+import { defaultValueSchemable } from "sequelize/lib/utils";
 
 
-export class AuthController {
+class AuthController {
 
     static hashPassword(psw) { // implementare meccanismo di password hashing 
         return psw; 
@@ -31,8 +32,8 @@ export class AuthController {
     }
 
     // rilascio token JWT dal Server 
-    static issueToken(username){
-        return jwt.sign({user: username}, JWT_SECRET, { expiresIn: `${24*60*60}s` })
+    static issueToken(userID){
+        return jwt.sign({ userID: userID }, JWT_SECRET, { expiresIn: `${24*60*60}s` })
     }
 
     // verifica validità token 
@@ -41,3 +42,5 @@ export class AuthController {
     }
 
 }
+
+export default AuthController; 

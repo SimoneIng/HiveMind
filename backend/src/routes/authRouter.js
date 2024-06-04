@@ -1,12 +1,13 @@
 import express from 'express'; 
-import { AuthController } from '../controllers/authController.js';
+import { AuthController } from '../controllers/index.js';
 
 const authRouter = express.Router(); 
 
     authRouter.post('/login', async (req, res) => {
         let isAuth = await AuthController.checkCredentials(req, res); 
-        if(isAuth){
-            res.json(AuthController.issueToken(req.body.usr))
+        console.log('isAuth', isAuth.userID)
+        if(isAuth){ // isAuth è un istanza di User 
+            res.json(AuthController.issueToken(isAuth.userID))
         } else {
             res.status(401)
             res.json({

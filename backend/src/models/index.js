@@ -12,20 +12,20 @@ const Idea = connection.define('Idea', IdeaModel, {timestamps: false});
 const Feedback = connection.define('Feedback', FeedbackModel, {timestamps: false});
 
 // Definizione Associazioni tra Models 
-User.Ideas = User.hasMany(Idea, { onDelete: 'CASCADE' }); 
-Idea.User = Idea.belongsTo(User); 
+User.Ideas = User.hasMany(Idea, { foreignKey: {allowNull: false, name: 'userID'}, onDelete: 'CASCADE' }); 
+Idea.User = Idea.belongsTo(User, {foreignKey: {allowNull: false, name: 'userID'} }); 
 
-User.Comments = User.hasMany(Comment, { onDelete: 'CASCADE' }); 
-Comment.User = Comment.belongsTo(User); 
+User.Comments = User.hasMany(Comment, { foreignKey: {allowNull: false, name: 'userID'}, onDelete: 'CASCADE' }); 
+Comment.User = Comment.belongsTo(User, {foreignKey: {allowNull: false, name: 'userID'} }); 
 
-User.Feedbacks = User.hasMany(Feedback, { onDelete: 'CASCADE' }); 
-Feedback.User = Feedback.belongsTo(User); 
+User.Feedbacks = User.hasMany(Feedback, { foreignKey: {allowNull: false, name: 'userID'}, onDelete: 'CASCADE' }); 
+Feedback.User = Feedback.belongsTo(User, { foreignKey: {allowNull: false, name: 'userID'} }); 
 
-Idea.Comments = Idea.hasMany(Comment, { onDelete: 'CASCADE' }); 
-Comment.Idea = Comment.belongsTo(Idea); 
+Idea.Comments = Idea.hasMany(Comment, { foreignKey: {allowNull: false, name: 'ideaID'}, onDelete: 'CASCADE' }); 
+Comment.Idea = Comment.belongsTo(Idea, { foreignKey: {allowNull: false, name: 'ideaID'} }); 
 
-Idea.Feedbacks = Idea.hasMany(Feedback, { onDelete: 'CASCADE' }); 
-Feedback.Idea = Feedback.belongsTo(Idea); 
+Idea.Feedbacks = Idea.hasMany(Feedback, { foreignKey: {allowNull: false, name: 'ideaID'}, onDelete: 'CASCADE' }); 
+Feedback.Idea = Feedback.belongsTo(Idea, { foreignKey: {allowNull: false, name: 'ideaID'} }); 
 
 
 // export dei Models 

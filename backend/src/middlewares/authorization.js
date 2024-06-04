@@ -1,4 +1,4 @@
-import { AuthController } from "../controllers/authController";
+import { AuthController } from "../controllers/index.js";
 
 // verifica il token JWT nelle richieste HTTP 
 export function userIsAuth(req, res, next){
@@ -17,8 +17,8 @@ export function userIsAuth(req, res, next){
                 next({
                     status: 401, message: 'Unauthorized, JWT Token not valid'
                 })
-            } else {
-                req.username = decodedToken.user; 
+            } else { 
+                req.userID = decodedToken.userID; // essenziale per le query sul database
                 next(); 
             }
         })

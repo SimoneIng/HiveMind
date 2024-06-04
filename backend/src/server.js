@@ -7,7 +7,7 @@ import { SERVER_PORT } from './config/environment.js';
 const app = express(); 
  
 
-// creazione tabelle del database richiamando il metodo syncDatabase()
+// creazione tabelle del database richiamando il metodo  syncDatabase()
 
 // middlewares 
 app.use(express.json())

@@ -1,6 +1,8 @@
 
 
-export class FeedbackController {
+class FeedbackController {
 
     
 }
+
+export default FeedbackController; 

@@ -1,5 +1,7 @@
 
 
-export class UserController {
+class UserController {
     
 }
+
+export default UserController; 
