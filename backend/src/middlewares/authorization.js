@@ -8,17 +8,18 @@ export function userIsAuth(req, res, next){
 
     if(!token){
         next({
-            status: 401, message: 'Unauthorized'
+            statusCode: 401, message: 'Unauthorized'
         })
         return; 
     } else {
         AuthController.isTokenValid(token, (err, decodedToken) => {
             if(err){
                 next({
-                    status: 401, message: 'Unauthorized, JWT Token not valid'
+                    statusCode: 401, message: 'Unauthorized, JWT Token not valid'
                 })
             } else { 
-                req.userID = decodedToken.userID; // essenziale per le query sul database
+                console.log(decodedToken)
+                req.userId = decodedToken.userID; // essenziale per le query sul database
                 next(); 
             }
         })

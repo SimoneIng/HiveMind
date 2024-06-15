@@ -3,27 +3,33 @@ import { AuthController } from '../controllers/index.js';
 
 const authRouter = express.Router(); 
 
-    authRouter.post('/login', async (req, res) => {
-        let isAuth = await AuthController.checkCredentials(req, res); 
-        console.log('isAuth', isAuth.userID)
-        if(isAuth){ // isAuth è un istanza di User 
-            res.json(AuthController.issueToken(isAuth.userID))
-        } else {
-            res.status(401)
-            res.json({
-                error: 'Invalid Credentials, try again.'
+    authRouter.post('/auth/login', async (req, res, next) => {
+        let authUser = await AuthController.checkCredentials(req); 
+       
+        if(authUser){ // isAuth è un istanza di User 
+            res.status(200).json({
+                    message: 'Successfull Login', 
+                    user: authUser, token: AuthController.issueToken(authUser.userID)
             })
+        } else {
+            next({status: 401, message: 'Invalid Credentials'})
         }
     }) 
 
-    authRouter.post('/registration', async (req, res, next) => {
+    authRouter.post('/auth/registration', async (req, res, next) => {
         AuthController.saveNewUser(req, res).then( newUser => {
-            res.json(newUser)
+            res.status(201).json({ message: 'User Created', newUser})
         }).catch( err =>{
-            next({
-                status: 500, message: 'Could Not save User'
-            })
+            next({message: 'Could Not save User'})
         })
+    })
+
+    authRouter.post('/auth/refresh', async (req, res, next) => {
+
+    })
+
+    authRouter.post('/auth/logout', async (req, res, next) => {
+        
     })
 
 

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Feedback = {
-    FeedbackID: {
+    feedbackID: {
         type: DataTypes.UUID, 
         defaultValue: DataTypes.UUIDV4, 
         primaryKey: true 
@@ -9,6 +9,11 @@ const Feedback = {
     flag: {
         type: DataTypes.BOOLEAN, 
         allowNull: false, 
+    },
+    createdAt: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+        defaultValue: Date.now()
     }
 }
 

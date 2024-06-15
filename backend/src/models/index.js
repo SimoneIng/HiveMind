@@ -27,6 +27,7 @@ Comment.Idea = Comment.belongsTo(Idea, { foreignKey: {allowNull: false, name: 'i
 Idea.Feedbacks = Idea.hasMany(Feedback, { foreignKey: {allowNull: false, name: 'ideaID'}, onDelete: 'CASCADE' }); 
 Feedback.Idea = Feedback.belongsTo(Idea, { foreignKey: {allowNull: false, name: 'ideaID'} }); 
 
+// l'opzione 'as' serve a creare metodi di convienenza per effettuare operazioni dalle istanze stesse di un Model
 
 // export dei Models 
 export { User, Comment, Idea, Feedback }; 

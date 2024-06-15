@@ -9,6 +9,11 @@ const Comment = {
     description: {
         type: DataTypes.STRING(100), 
         allowNull: false
+    }, 
+    createdAt: {
+        type: DataTypes.DATE, 
+        allowNull: false, 
+        defaultValue: Date.now()
     }
 }
 

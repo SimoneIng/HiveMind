@@ -19,7 +19,7 @@ const Idea = {
         allowNull: false, 
         defaultValue: Date.now()
     }, 
-    upVotes: {
+    upVotes: { 
         type: DataTypes.INTEGER, 
         allowNull: false, 
         defaultValue: 0, 
@@ -33,6 +33,14 @@ const Idea = {
         defaultValue: 0, 
         validate: {
             min: 0 
+        }
+    },
+    commentsNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false, 
+        defaultValue: 0, 
+        validate: {
+            min: 0
         }
     }
 }

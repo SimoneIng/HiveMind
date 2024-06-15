@@ -1,47 +1,46 @@
-import { Idea } from "../models/index.js";
-
+import { Idea, User } from "../models/index.js";
+import HttpError from '../config/HttpError.js'; 
 
 class IdeaController {
     
     static async getIdeas(){
-        return Idea.findAll()
+        return Idea.findAll({
+            include: [{
+                model: User, 
+                attributes: {
+                    exclude: ['userID','passwordHash']
+                }
+            }]
+        })
     }
 
-    static async getIdeaById(ideaID){
-        return Idea.findByPk(ideaID)
-    }
-
-    static async getIdeasByuserID(req){
-
+    static async getIdeaById(req){
+        return Idea.findByPk(req.params.ideaId)
     }
 
     static async uploadIdea(req){
-         let newIdea = {
+         const newIdea = {
             title: req.body.title,
             description: req.body.description, 
-            userID: req.userID 
+            userID: req.userId 
          }
-         console.log(newIdea)
          return Idea.create(newIdea)
     }
 
     static async deleteIdeaById(req){
         // trova l'idea da cancellare 
-        let ideaToDelete = await this.getIdeaById(req.params.id)
+        const ideaToDelete = await this.getIdeaById(req)
         
-        if(!ideaToDelete){
-           throw new Error('Resource not exists') 
-        } else {
-            if(ideaToDelete.userID !== req.userID){
-                throw new Error('You do not have permission to delete the resource')
-            } else {
-                await Idea.destroy({ where: { ideaID: ideaToDelete.ideaID }})
-                return ideaToDelete 
-            }
-        }
+        if(!ideaToDelete) 
+            throw new HttpError(404, 'Idea Not Found'); 
+        if(req.userId != ideaToDelete.userID)
+            throw new HttpError(403, 'You do not have permission to delete this Idea.'); 
+
+        await ideaToDelete.destroy(); 
+        return ideaToDelete; 
+
     }
 
 }
-
 
 export default IdeaController; 
