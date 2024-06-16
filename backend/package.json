@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon ./src/server.js",
+    "dbsetup": "node ./src/config/dbSetup.js",  
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
