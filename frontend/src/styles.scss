@@ -1,8 +1,5 @@
 
-@import './styles/variables'; 
-@import './styles//themes'; 
 
-body {
-    background-color: var(--background-color);
-    margin: 0; 
-}
+@tailwind base;
+@tailwind components; 
+@tailwind utilities; 
