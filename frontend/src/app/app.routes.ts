@@ -12,5 +12,10 @@ export const routes: Routes = [
         path: 'Login', 
         component: LoginComponent, 
         title: 'HiveMind Login'
+    },
+    {
+        path: "", 
+        redirectTo: "/Home", 
+        pathMatch: "full"
     }
 ];

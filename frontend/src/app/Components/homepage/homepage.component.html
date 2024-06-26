@@ -1,11 +1,19 @@
 
 
-<section class="flex flex-col flex-grow items-center justify-center">
+<section class="flex flex-col items-center justify-center h-full">
+    @if(authService.isUserAuthenticated() == false){
     <div class="mb-3">
-        <img class="w-28" src="assets/logo.png">
+        <a RouterLink="/Home">
+            <img alt="HiveMind Logo" class="w-full max-w-28" src="assets/logo.png">
+        </a>
     </div>
     <h1 class="text-3xl font-bold tracking-wide">HiveMind App</h1>
     <div class="mt-3 text-center">
         <p class="text-lg font-normal">Registrati, Condividi le tue Idee e Commenta le Idee degli altri Utenti...</p>
     </div>
-</section> 
+    } @else {
+        <div>
+            <p>User Authenticated</p>
+        </div>
+    }
+</section>
