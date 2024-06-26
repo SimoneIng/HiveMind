@@ -8,22 +8,28 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          primary: '#4CAF50',
-          secondary: '#81C784',
-          background: '#FFFFFF',
-          text: '#212121',
-          warning: '#FF9800',
-          success: '#388E3C',
+          background: '#F5F5F5',
+          text: '#E1DEE9',
+          accentGreenLight: '#DFF2E1',
+          accentGreenMedium: '#A5D6A7',
+          accentBlueLight: '#E3F2FD',
+          grayMedium: '#B0BEC5',
+          navbar: '#D5CFE1',
         },
+        // Tema Scuro
         dark: {
-          primary: '#4CAF50',
-          secondary: '#388E3C',
           background: '#121212',
-          text: '#E0E0E0',
-          warning: '#FF5722',
-          success: '#1B5E20',
-        },
+          text: '#FFFFFF',
+          accentGreenDark: '#388E3C',
+          accentGreenLight: '#66BB6A',
+          accentBlueDark: '#1E88E5',
+          grayDark: '#757575',
+          navbar: '#1E1E1E',
+        }
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      }
     }, 
   }, 
   plugins: [],
