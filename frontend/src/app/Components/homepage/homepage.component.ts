@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-
+  
   authService = inject(AuthService)
 
 }

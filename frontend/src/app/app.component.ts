@@ -5,7 +5,7 @@ import { HomepageComponent } from './Components/homepage/homepage.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
-
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-root',

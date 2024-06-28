@@ -1,27 +1,73 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { BackendService } from '../../_services/backend/backend.service';
+import { AuthService } from '../../_services/auth/auth.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 
   router = inject(Router)
+  backend = inject(BackendService)
+  auth = inject(AuthService)
 
-  username: string = ""; 
-  password: string = ""; 
+  isLoginFormSubmitted: boolean = false; 
+
+  loginForm = new FormGroup({
+    username: new FormControl('', 
+      [Validators.required, Validators.minLength(6), Validators.maxLength(15)]), 
+    password: new FormControl('', 
+      [Validators.required, Validators.minLength(6), Validators.maxLength(16)])
+  })
 
   onLoginSubmit(){
 
-
-
+    this.isLoginFormSubmitted = true; 
     
-    this.router.navigateByUrl('/Home')
+    if(this.loginForm.invalid){
+      // messaggio di errore 
+      Swal.fire({
+        icon: "error",
+        title: "Non hai inserito i dati correttamente",
+        showConfirmButton: false, 
+        timer: 1500 
+      })
+    } else {
+      this.backend.login({
+        usr: this.loginForm.value.username as string, 
+        psw: this.loginForm.value.password as string 
+      }).subscribe({
+        next: (response) => {
+          this.auth.updateAuthStateOnLogin(response)
+        },
+        error: err => {
+          // messaggio di errore 
+          Swal.fire({
+            icon: "error",
+            title: "Credenziali non Valide",
+            showConfirmButton: false, 
+            timer: 1500 
+          })
+        }, 
+        complete: () => {
+          Swal.fire({
+            icon: "success",
+            title: "Hai effettuato il Login",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigateByUrl('/Home')
+        }
+      })
+    }
+    
   }
 
 }

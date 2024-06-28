@@ -1,4 +1,4 @@
 export interface AuthRequest {
     usr: string, 
-    pwd: string 
+    psw: string 
 }

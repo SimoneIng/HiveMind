@@ -1,50 +1,55 @@
 import { Injectable, WritableSignal, effect, signal, computed } from '@angular/core';
 import { jwtDecode } from "jwt-decode"; 
 import { User } from '../../_models/User.type';
+import { LoginResponse } from '../../_models/LoginResponse.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  UserLoggedIn: WritableSignal<User> = signal<User>({
-    userDetails: this.getUserDetails(), 
-    token: this.getUserToken(), 
-    isAuthenticated: this.verifyToken(this.getUserToken()) 
+  // Crea un signal e li inizializza 
+  authState: WritableSignal<User> = signal<User>({
+    userDetails: JSON.parse(this.getUserDetails()), 
+    token: this.getToken(), 
+    isAuthenticated: this.verifyToken(this.getToken())
   })
 
-  user = computed(() => { this.UserLoggedIn().userDetails })
-  token = computed(() => { this.UserLoggedIn().token })
-  isAuthenticated = computed(() => { this.UserLoggedIn().isAuthenticated }) 
+  // Crea tre segnali che si aggiornano in base al segnale qui sopra 
+  user = computed(() => this.authState().userDetails)
+  token = computed(() => this.authState().token)
+  isAuthenticated = computed(() => this.authState().isAuthenticated)
 
   constructor(){
+    // funzione che viene eseguita ogni volta che il signal cambia 
     effect( () => {
-      const user = this.UserLoggedIn().userDetails;
-      const token = this.UserLoggedIn().token; 
+      const token = this.authState().token; 
+      const userDetails = this.authState().userDetails; 
 
-      if(user != null){
-        localStorage.setItem('User', user.toString())
-      } else {
-        localStorage.removeItem('User'); 
-      }
-
+      // aggiorna token e informazioni utente all'interno del localStorage 
       if(token != null){
-        localStorage.setItem("Token", token)
+        localStorage.setItem('Token', token)
       } else {
-        localStorage.removeItem("Token")
+        localStorage.removeItem('Token')
+      } 
+      if(userDetails != null){
+        localStorage.setItem('User', JSON.stringify(userDetails))
+      } else {
+        localStorage.removeItem('User')
       }
-
     })
   }
 
-  getUserDetails(){
-    const user = localStorage.getItem('User')
-    if (user) return JSON.parse(user)
-    return null 
+  getToken(){
+    return localStorage.getItem('Token')
   }
 
-  getUserToken(){
-    return localStorage.getItem("Token")
+  getUserDetails(){
+    return JSON.stringify(localStorage.getItem('User')); 
+  }
+
+  isUserAuthenticated(): boolean {
+    return this.verifyToken(this.getToken())
   }
 
   verifyToken(token: string | null): boolean {
@@ -64,15 +69,11 @@ export class AuthService {
     return false;
   }
 
-  isUserAuthenticated(): boolean {
-    return this.verifyToken(this.getUserToken());
-  }
-
-  userLogout(){
-    this.UserLoggedIn.set({
-      userDetails: null, 
-      token: null, 
-      isAuthenticated: false 
+  updateAuthStateOnLogin(httpResponse: LoginResponse): void {
+    this.authState.set({
+      userDetails: httpResponse.user, 
+      token: httpResponse.token, 
+      isAuthenticated: this.verifyToken(httpResponse.token)
     })
   }
 

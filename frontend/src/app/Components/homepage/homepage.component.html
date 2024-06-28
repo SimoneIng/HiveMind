@@ -1,7 +1,7 @@
 
 
 <section class="flex flex-col items-center justify-center h-full">
-    @if(authService.isUserAuthenticated() == false){
+    @if(!authService.isAuthenticated()){
     <div class="mb-3">
         <a RouterLink="/Home">
             <img alt="HiveMind Logo" class="w-full max-w-28" src="assets/logo.png">
@@ -18,7 +18,7 @@
     </div>
     } @else {
         <div>
-            <p>User Authenticated</p>
+            <p>Authenticated</p>
         </div>
     }
 </section>
