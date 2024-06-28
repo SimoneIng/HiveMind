@@ -1,25 +1,29 @@
 import { Idea, User } from "../models/index.js";
 import { JWT_SECRET } from '../config/environment.js'; 
+import bcrypt from 'bcrypt'; 
 import jwt from 'jsonwebtoken'; 
 
 
 class AuthController {
 
-    static hashPassword(psw) { // implementare meccanismo di password hashing 
-        return psw; 
-    }
-
     // controllo delle credenziali sul database 
     static async checkCredentials(req){
-         return User.findOne({
+         const user = await User.findOne({
             where: {
                 userName: req.body.usr, 
-                passwordHash: this.hashPassword(req.body.psw)
             },
             include: [{
                 model: Idea
             }]
         })
+
+        // match password inserita, con la password criptata sul database  
+        const passwordMatch = await bcrypt.compare(req.body.psw, user.passwordHash)
+
+        if(passwordMatch) {
+            user.passwordHash = ''; 
+            return user; 
+        } else return null; 
 
     }
 
@@ -29,7 +33,7 @@ class AuthController {
         // crea un nuovo user e prova a salvarlo sul database
         let newUser = await User.create({
             userName: req.body.usr, 
-            passwordHash: this.hashPassword(req.body.psw)
+            passwordHash: req.body.psw
         })
         return newUser; 
     }

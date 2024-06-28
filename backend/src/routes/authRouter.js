@@ -3,8 +3,8 @@ import { AuthController } from '../controllers/index.js';
 
 const authRouter = express.Router(); 
 
-    authRouter.post('/auth/login', async (req, res, next) => {
-        let authUser = await AuthController.checkCredentials(req); 
+    authRouter.post('/auth/login', (req, res, next) => {
+        let authUser = AuthController.checkCredentials(req); 
        
         if(authUser){ // isAuth è un istanza di User 
             res.status(200).json({
@@ -20,6 +20,7 @@ const authRouter = express.Router();
         AuthController.saveNewUser(req, res).then( newUser => {
             res.status(201).json({ message: 'User Created', newUser})
         }).catch( err =>{
+            console.log(err)
             next({message: 'Could Not save User'})
         })
     })

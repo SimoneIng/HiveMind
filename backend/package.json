@@ -6,16 +6,19 @@
   "type": "module",
   "scripts": {
     "start": "nodemon ./src/server.js",
-    "dbsetup": "node ./src/config/dbSetup.js",  
+    "dbsetup": "node ./src/config/dbSetup.js",
+    "fillDB": "node ./src/config/fillDatabase.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",

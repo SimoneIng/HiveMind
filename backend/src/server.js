@@ -1,13 +1,9 @@
 import express from 'express'; 
 import cors from 'cors'; 
 import { authRouter, usersRouter, ideasRouter } from './routes/index.js'; 
-import syncDatabase from './config/syncDB.js';
 import { SERVER_PORT } from './config/environment.js';
 
 const app = express(); 
- 
-
-// creazione tabelle del database richiamando il metodo syncDatabase()
 
 // middlewares 
 app.use(express.json())
