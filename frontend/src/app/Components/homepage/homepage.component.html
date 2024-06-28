@@ -18,7 +18,12 @@
     </div>
     } @else {
         <div>
-            <p>Authenticated</p>
+            <p>{{userService.username()}} Authenticated</p>
+            @if(userIdeas){
+                @for(idea of userIdeas; track idea){
+                    <p>Idea {{idea.title}}</p>
+                }
+            }
         </div>
     }
 </section>

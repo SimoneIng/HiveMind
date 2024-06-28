@@ -1,5 +1,6 @@
+import { Idea } from "./Idea.type";
+
 export interface User {
-    userDetails: object | null, 
-    token: string | null, 
-    isAuthenticated: boolean 
+    username: string | null, 
+    ideas: Idea[] | null 
 }

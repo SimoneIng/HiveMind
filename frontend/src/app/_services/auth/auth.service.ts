@@ -1,7 +1,7 @@
 import { Injectable, WritableSignal, effect, signal, computed } from '@angular/core';
 import { jwtDecode } from "jwt-decode"; 
-import { User } from '../../_models/User.type';
 import { LoginResponse } from '../../_models/LoginResponse.type';
+import { AuthState } from '../../_models/AuthState.type';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +9,11 @@ import { LoginResponse } from '../../_models/LoginResponse.type';
 export class AuthService {
 
   // Crea un signal e li inizializza 
-  authState: WritableSignal<User> = signal<User>({
-    userDetails: JSON.parse(this.getUserDetails()), 
+  authState: WritableSignal<AuthState> = signal<AuthState>({
     token: this.getToken(), 
     isAuthenticated: this.verifyToken(this.getToken())
   })
 
-  // Crea tre segnali che si aggiornano in base al segnale qui sopra 
-  user = computed(() => this.authState().userDetails)
   token = computed(() => this.authState().token)
   isAuthenticated = computed(() => this.authState().isAuthenticated)
 
@@ -24,7 +21,6 @@ export class AuthService {
     // funzione che viene eseguita ogni volta che il signal cambia 
     effect( () => {
       const token = this.authState().token; 
-      const userDetails = this.authState().userDetails; 
 
       // aggiorna token e informazioni utente all'interno del localStorage 
       if(token != null){
@@ -32,20 +28,12 @@ export class AuthService {
       } else {
         localStorage.removeItem('Token')
       } 
-      if(userDetails != null){
-        localStorage.setItem('User', JSON.stringify(userDetails))
-      } else {
-        localStorage.removeItem('User')
-      }
+
     })
   }
 
   getToken(){
     return localStorage.getItem('Token')
-  }
-
-  getUserDetails(){
-    return JSON.stringify(localStorage.getItem('User')); 
   }
 
   isUserAuthenticated(): boolean {
@@ -71,7 +59,6 @@ export class AuthService {
 
   updateAuthStateOnLogin(httpResponse: LoginResponse): void {
     this.authState.set({
-      userDetails: httpResponse.user, 
       token: httpResponse.token, 
       isAuthenticated: this.verifyToken(httpResponse.token)
     })

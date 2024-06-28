@@ -1,5 +1,10 @@
+import { User } from "./User.type"
+
 export interface LoginResponse {
     message: string, 
-    user: object, 
+    user: {
+        userName: string, 
+        Ideas: [] 
+    }, 
     token: string 
 }

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { BackendService } from '../../_services/backend/backend.service';
 import { AuthService } from '../../_services/auth/auth.service';
 import Swal from 'sweetalert2'; 
+import { UserService } from '../../_services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent {
   router = inject(Router)
   backend = inject(BackendService)
   auth = inject(AuthService)
+  user = inject(UserService)
 
   isLoginFormSubmitted: boolean = false; 
 
@@ -46,6 +48,7 @@ export class LoginComponent {
       }).subscribe({
         next: (response) => {
           this.auth.updateAuthStateOnLogin(response)
+          this.user.updateUserOnLogin(response)
         },
         error: err => {
           // messaggio di errore 
