@@ -17,13 +17,13 @@ class AuthController {
             }]
         })
 
+        if(!user) return null; 
+
         // match password inserita, con la password criptata sul database  
         const passwordMatch = await bcrypt.compare(req.body.psw, user.passwordHash)
 
-        if(passwordMatch) {
-            user.passwordHash = ''; 
-            return user; 
-        } else return null; 
+        if(passwordMatch) return user; 
+        else return null; 
 
     }
 

@@ -10,4 +10,4 @@ const syncDatabase = async () => {
     }
 }
 
-syncDatabase(); 
+await syncDatabase(); 

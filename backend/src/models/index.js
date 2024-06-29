@@ -33,5 +33,15 @@ User.beforeCreate(async (user, options) => {
     user.passwordHash = await bcrypt.hash(user.passwordHash, salt)
 })
 
+User.beforeBulkCreate(async (users) => {
+    await Promise.all(users.map(async (user) => {
+        if(user.passwordHash){
+            const salt = await bcrypt.genSalt(10); 
+            user.passwordHash = await bcrypt.hash(user.passwordHash, salt)
+        }
+    }))
+})
+
+
 // export dei Models 
 export { User, Comment, Idea, Feedback }; 

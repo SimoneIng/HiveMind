@@ -1,30 +1,31 @@
 import connection from "./connection.js";
 import { User, Idea, Comment, Feedback } from "../models/index.js";
 
-const users = [
-    { userName: 'alice', passwordHash: 'passwordHash123' },
-    { userName: 'bob', passwordHash: 'passwordHash123' },
-    { userName: 'carol', passwordHash: 'passwordHash123' },
-    { userName: 'dave', passwordHash: 'passwordHash123' },
-    { userName: 'eve', passwordHash: 'passwordHash123' },
-    { userName: 'frank', passwordHash: 'passwordHash123' },
-    { userName: 'grace', passwordHash: 'passwordHash123' },
-    { userName: 'heidi', passwordHash: 'passwordHash123' },
-    { userName: 'ivan', passwordHash: 'passwordHash123' },
-    { userName: 'judy', passwordHash: 'passwordHash123' },
-    { userName: 'mallory', passwordHash: 'passwordHash123' },
-    { userName: 'oscar', passwordHash: 'passwordHash123' },
-    { userName: 'peggy', passwordHash: 'passwordHash123' },
-    { userName: 'trent', passwordHash: 'passwordHash123' },
-    { userName: 'victor', passwordHash: 'passwordHash123' },
-    { userName: 'walter', passwordHash: 'passwordHash123' },
-    { userName: 'xena', passwordHash: 'passwordHash123' },
-    { userName: 'yvonne', passwordHash: 'passwordHash123' },
-    { userName: 'zara', passwordHash: 'passwordHash123' },
-    { userName: 'max', passwordHash: 'passwordHash123' }
-];
 
-const ideas = [
+const users = [
+    { userName: 'alice', passwordHash: 'password1' },
+    { userName: 'bob', passwordHash: 'password1' },
+    { userName: 'carol', passwordHash: 'password1' },
+    { userName: 'dave', passwordHash: 'password1' },
+    { userName: 'eve', passwordHash: 'password1' },
+    { userName: 'frank', passwordHash: 'password1' },
+    { userName: 'grace', passwordHash: 'password1' },
+    { userName: 'heidi', passwordHash: 'password1' },
+    { userName: 'ivan', passwordHash: 'password1' },
+    { userName: 'judy', passwordHash: 'password1' },
+    { userName: 'mallory', passwordHash: 'password1' },
+    { userName: 'oscar', passwordHash: 'password1' },
+    { userName: 'peggy', passwordHash: 'password1' },
+    { userName: 'trent', passwordHash: 'password1' },
+    { userName: 'victor', passwordHash: 'password1' },
+    { userName: 'walter', passwordHash: 'password1' },
+    { userName: 'xena', passwordHash: 'password1' },
+    { userName: 'yvonne', passwordHash: 'password1' },
+    { userName: 'zara', passwordHash: 'password1' },
+    { userName: 'max', passwordHash: 'password1' }
+];
+  
+ const ideas = [
     { title: 'Recycling App', description: 'An app to help people recycle more effectively.' },
     { title: 'Smart Home Assistant', description: 'An AI-based assistant for managing home devices.' },
     { title: 'Electric Car Charger', description: 'A network of fast electric car chargers.' },
@@ -52,3 +53,17 @@ const ideas = [
     { title: 'Career Advice', description: 'A platform for career advice and mentorship.' }
 ];
 
+  const createdUsers = await User.bulkCreate(users, {returning: true}); 
+  const ideasToInsert = []; 
+
+  createdUsers.forEach(user => {
+    const userIdeas = ideas.slice(0,5); 
+    userIdeas.forEach(idea => {
+        ideasToInsert.push({...idea, userID: user.userID})
+    })
+  })
+
+  await Idea.bulkCreate(ideasToInsert); 
+  await connection.sync(); 
+
+  

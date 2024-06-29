@@ -3,10 +3,10 @@ import { AuthController } from '../controllers/index.js';
 
 const authRouter = express.Router(); 
 
-    authRouter.post('/auth/login', (req, res, next) => {
-        let authUser = AuthController.checkCredentials(req); 
+    authRouter.post('/auth/login', async (req, res, next) => {
+        let authUser = await AuthController.checkCredentials(req); 
        
-        if(authUser){ // isAuth è un istanza di User 
+        if(authUser != null){ // isAuth è un istanza di User 
             res.status(200).json({
                     message: 'Successfull Login', 
                     user: authUser, token: AuthController.issueToken(authUser.userID)
