@@ -22,7 +22,6 @@ export class BackendService {
 
   login(loginRequest: AuthRequest){
     const url = `${this.backendUrl}/auth/login`;
-    console.log(loginRequest)
     return this.http.post<LoginResponse>(url, loginRequest, this.httpOptions); 
   }
 

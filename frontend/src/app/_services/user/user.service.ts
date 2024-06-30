@@ -36,6 +36,7 @@ export class UserService {
 
 
   updateUserOnLogin(httpResponse: LoginResponse): void {
+    console.log(httpResponse)
     this.loggedUser.set({
       username: httpResponse.user.userName, 
       ideas: httpResponse.user.Ideas
