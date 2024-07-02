@@ -2,11 +2,12 @@ import { Idea, User } from "../models/index.js";
 import { JWT_SECRET } from '../config/environment.js'; 
 import bcrypt from 'bcrypt'; 
 import jwt from 'jsonwebtoken'; 
+import HttpError from "../config/HttpError.js";
 
 
 class AuthController {
 
-    // controllo delle credenziali sul database 
+
     static async checkCredentials(req){
          const user = await User.findOne({
             where: {
@@ -27,7 +28,7 @@ class AuthController {
 
     }
 
-    // creazione nuovo utente nel database (registrazione)
+    
     static async saveNewUser(req, res){
 
         // crea un nuovo user e prova a salvarlo sul database
@@ -40,12 +41,32 @@ class AuthController {
 
     // rilascio token JWT dal Server 
     static issueToken(userID){
-        return jwt.sign({userID}, JWT_SECRET, { expiresIn: `${24*60*60}s` })
+        return jwt.sign({userID}, JWT_SECRET, { expiresIn: `30m` })
     }
 
     // verifica validità token 
     static isTokenValid(token, callback){
         jwt.verify(token, JWT_SECRET, callback); 
+    }
+
+    static refreshToken(req){
+        const authHeader = req.headers['authorization']; 
+        const token = authHeader?.split(' ')[1]; 
+
+        if(!token){
+            throw new HttpError(401, "Unauthorized"); 
+        } else {
+            const newToken = 
+            jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+                if(err){
+                    throw new HttpError(401, "Token Not Valid"); 
+                } else {
+                    const userID = decodedToken.userID; 
+                    return jwt.sign({userID}, JWT_SECRET, {expiresIn: `30m` }); 
+                }
+            }) 
+            return newToken; 
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 import express from 'express'; 
 import cors from 'cors'; 
+
 import { authRouter, usersRouter, ideasRouter } from './routes/index.js'; 
 import { SERVER_PORT } from './config/environment.js';
 
@@ -23,10 +24,10 @@ app.use( (err, req, res, next) => {
     })
   });
 
+
 app.get('/', (req, res) => {
     res.redirect('/auth/login'); 
 })
-
 
 app.listen(SERVER_PORT, () => {
     console.log(`Server running on http://localhost:${SERVER_PORT}`); 

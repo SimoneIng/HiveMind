@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon ./src/server.js",
     "dbsetup": "node ./src/config/dbSetup.js",
-    "fillDB": "node ./src/config/fillDatabase.js",
+    "filldb": "node ./src/config/fillDatabase.js",
+    "gendoc": "node ./src/config/genSwaggerDoc.js",  
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

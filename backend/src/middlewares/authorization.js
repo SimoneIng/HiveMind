@@ -24,5 +24,5 @@ export function userIsAuth(req, res, next){
             }
         })
     }
-
 }
+

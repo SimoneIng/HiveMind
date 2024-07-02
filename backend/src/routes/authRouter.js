@@ -25,12 +25,16 @@ const authRouter = express.Router();
         })
     })
 
-    authRouter.post('/auth/refresh', async (req, res, next) => {
-
-    })
-
-    authRouter.post('/auth/logout', async (req, res, next) => {
-        
+    authRouter.post('/auth/refresh', (req, res, next) => {
+        try {
+            let newToken = AuthController.refreshToken(req)
+            res.status(200).json({
+                message: "New Token",
+                token: newToken
+            })
+        } catch (err){
+            next(err); 
+        }
     })
 
 
