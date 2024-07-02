@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { AuthService } from '../../_services/auth/auth.service';
+import { UserService } from '../../_services/user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +15,24 @@ import { AuthService } from '../../_services/auth/auth.service';
 export class NavbarComponent {
 
   navbarIsOpen:boolean = false;
-  auth = inject(AuthService) 
+  auth = inject(AuthService); 
+  user = inject(UserService); 
 
   toggleNavbarMenu(){
     this.navbarIsOpen = !this.navbarIsOpen; 
+  }
+
+  handleLogout(){
+    this.auth.updateAuthStateOnLogout(); 
+    this.user.updateUserOnLogout(); 
+
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "Hai Effettuato il Logout",
+      showConfirmButton: false,
+      timer: 2000
+    });
   }
 
 

@@ -43,6 +43,12 @@ export class UserService {
     })
   }
 
+  updateUserOnLogout(){
+    this.loggedUser.set({
+      username: null, 
+      ideas: [] 
+    })
+  }
 
 }
 

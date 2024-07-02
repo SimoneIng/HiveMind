@@ -64,4 +64,11 @@ export class AuthService {
     })
   }
 
+  updateAuthStateOnLogout(){
+    this.authState.set({
+      token: null, 
+      isAuthenticated: false
+    })
+  }
+
 }
