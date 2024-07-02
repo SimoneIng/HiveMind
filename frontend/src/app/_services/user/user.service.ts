@@ -11,7 +11,7 @@ export class UserService {
   // crea un signal e lo inizializza 
   loggedUser: WritableSignal<User> = signal<User>({
     username: this.getUsername(), 
-    ideas: []
+    ideas: this.getIdeas()
   })
 
   username = computed(() => this.loggedUser().username)
@@ -20,6 +20,7 @@ export class UserService {
   constructor(){
     effect(() => {
       const username = this.loggedUser().username; 
+      const ideas = this.loggedUser().ideas; 
 
       if(username != null){
         localStorage.setItem("Username", username)
@@ -27,11 +28,23 @@ export class UserService {
         localStorage.removeItem("Username")
       }
 
+      if(ideas != null){
+        localStorage.setItem("Ideas", JSON.stringify(ideas)); 
+      } else {
+        localStorage.removeItem("Ideas")
+      }
+
     })
   }
 
   getUsername(){
-    return localStorage.getItem("User")
+    return localStorage.getItem("Username")
+  }
+  
+  getIdeas(){
+    const ideas = localStorage.getItem("Ideas"); 
+    if(ideas != null) return JSON.parse(ideas); 
+    else return [] as Idea[]; 
   }
 
 
