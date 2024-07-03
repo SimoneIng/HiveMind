@@ -25,7 +25,7 @@ const authRouter = express.Router();
         })
     })
 
-    authRouter.post('/auth/refresh', (req, res, next) => {
+    authRouter.get('/auth/refresh', (req, res, next) => {
         try {
             let newToken = AuthController.refreshToken(req)
             res.status(200).json({
