@@ -47,7 +47,6 @@ export class LoginComponent {
         psw: this.loginForm.value.password as string 
       }).subscribe({
         next: (response) => {
-          console.log("response:", response) 
           this.auth.updateAuthStateOnLogin(response)
           this.user.updateUserOnLogin(response)
         },

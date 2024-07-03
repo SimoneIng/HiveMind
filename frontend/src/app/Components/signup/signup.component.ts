@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { BackendService } from '../../_services/backend/backend.service';
 import { AuthService } from '../../_services/auth/auth.service';
 import Swal from 'sweetalert2'; 
+import { UserService } from '../../_services/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +18,7 @@ export class SignupComponent {
   router = inject(Router)
   backend = inject(BackendService)
   auth = inject(AuthService)
+  user = inject(UserService)
 
   isSignUpFormSubmitted: boolean = false; 
 
@@ -49,17 +51,39 @@ export class SignupComponent {
         }, 
         complete: () => {
           Swal.fire({
-            position: "top-end",
             icon: "success",
-            title: "Ti sei Registrato con Successo",
+            title: "Ti sei Registrato",
             showConfirmButton: false,
             timer: 1500
           });
-          this.router.navigateByUrl('/Login')
+          this.loginAfterRegistration(); 
         }
       })
     }
+  }
 
+  loginAfterRegistration(){
+    this.backend.login({
+      usr: this.signUpForm.value.username as string, 
+      psw: this.signUpForm.value.password as string 
+    }).subscribe({
+      next: (response) => {
+        this.auth.updateAuthStateOnLogin(response)
+        this.user.updateUserOnLogin(response)
+      },
+      error: err => {
+        // messaggio di errore 
+        Swal.fire({
+          icon: "error",
+          title: "Riprova ad Accedere",
+          showConfirmButton: false, 
+          timer: 1500 
+        })
+      }, 
+      complete: () => {
+        this.router.navigateByUrl('/Home')
+      }
+    })
   }
 
 }
