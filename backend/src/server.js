@@ -26,7 +26,7 @@ app.use( (err, req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    res.redirect('/auth/login'); 
+    res.send("HiveMind Backend App")
 })
 
 app.listen(SERVER_PORT, () => {
