@@ -1,4 +1,10 @@
 export interface Idea {
-    title: string | null, 
-    description: string | null
+    ideaID: string, 
+    title: string, 
+    description: string,
+    createdAt: Date, 
+    upVotes: number, 
+    downVotes: number, 
+    commentsNumber: number, 
+    userID: string, 
 }

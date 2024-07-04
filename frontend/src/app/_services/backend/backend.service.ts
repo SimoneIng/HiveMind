@@ -67,9 +67,9 @@ export class BackendService {
     return this.http.get<GenericGetResponse>(url, this.httpOptions)
   }
 
-  postFeedback(ideaId: string, feedback: object){
+  postFeedback(ideaId: string, flag: boolean){
     const url = `${this.backendUrl}/ideas/${ideaId}/feedbacks`;
-    return this.http.post<GenericResponse>(url, feedback, this.httpOptions)
+    return this.http.post<GenericResponse>(url, {ideaId, flag}, this.httpOptions)
   }
 
   deleteFeedback(ideaId: string, feedbackId: string){
