@@ -1,4 +1,4 @@
-import { Idea, User } from "../models/index.js";
+import { Idea, User, Feedback, Comment } from "../models/index.js";
 import HttpError from '../config/HttpError.js'; 
 
 class IdeaController {
@@ -9,8 +9,9 @@ class IdeaController {
                 model: User, 
                 attributes: {
                     exclude: ['userID','passwordHash']
-                }
-            }]
+                }, 
+            }, { model: Comment }, { model: Feedback }
+        ]
         })
     }
 

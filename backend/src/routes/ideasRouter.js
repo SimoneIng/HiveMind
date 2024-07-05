@@ -14,6 +14,7 @@ const ideasRouter = express.Router();
                 data: ideas
             })
         }).catch( err => {
+            console.log(err)
             next({message: 'Failed to fetch ideas.'})
         })
     })
