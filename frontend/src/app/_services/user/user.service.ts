@@ -10,10 +10,12 @@ export class UserService {
 
   // crea un signal e lo inizializza 
   loggedUser: WritableSignal<User> = signal<User>({
+    userID: '', 
     username: this.getUsername(), 
     ideas: this.getIdeas()
   })
 
+  userID = computed(() => this.loggedUser().userID)
   username = computed(() => this.loggedUser().username)
   ideas = computed(() => this.loggedUser().ideas)
 
@@ -29,9 +31,9 @@ export class UserService {
       }
 
       if(ideas != null){
-        localStorage.setItem("Ideas", JSON.stringify(ideas)); 
+        localStorage.setItem("User-Ideas", JSON.stringify(ideas)); 
       } else {
-        localStorage.removeItem("Ideas")
+        localStorage.removeItem("User-Ideas")
       }
 
     })
@@ -40,7 +42,7 @@ export class UserService {
   getUsername(){
     return localStorage.getItem("Username")
   }
-  
+
   getIdeas(){
     const ideas = localStorage.getItem("Ideas"); 
     if(ideas != null) return JSON.parse(ideas); 
@@ -51,6 +53,7 @@ export class UserService {
   updateUserOnLogin(httpResponse: LoginResponse): void {
     console.log(httpResponse)
     this.loggedUser.set({
+      userID: httpResponse.user.userID, 
       username: httpResponse.user.userName, 
       ideas: httpResponse.user.Ideas
     })
@@ -58,6 +61,7 @@ export class UserService {
 
   updateUserOnLogout(){
     this.loggedUser.set({
+      userID: '', 
       username: null, 
       ideas: [] 
     })

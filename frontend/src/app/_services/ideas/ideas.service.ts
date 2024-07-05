@@ -1,5 +1,5 @@
 import { Injectable, computed, signal, WritableSignal, inject } from '@angular/core';
-import { IdeaWithUsers } from '../../_models/IdeaWithUsers.type';
+import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { GenericGetResponse } from '../../_models/GenericGetResponse.type';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { GenericGetResponse } from '../../_models/GenericGetResponse.type';
 })
 export class IdeasService {
 
-  ideasState: WritableSignal<IdeaWithUsers[]> = signal<IdeaWithUsers[]>([])
+  ideasState: WritableSignal<IdeaExtended[]> = signal<IdeaExtended[]>([])
   
   
   length = computed(() => this.getLength())
@@ -20,14 +20,14 @@ export class IdeasService {
   }
 
   setIdeas(response: GenericGetResponse) {
-    this.ideasState.set(response.data as IdeaWithUsers[])
+    this.ideasState.set(response.data as IdeaExtended[])
   }
 
-  addIdea(newIdea: IdeaWithUsers){
+  addIdea(newIdea: IdeaExtended){
     this.ideasState.update(currentIdeas => [...currentIdeas, newIdea])
   }
 
-  updateIdea(updatedIdea: IdeaWithUsers){
+  updateIdea(updatedIdea: IdeaExtended){
     this.ideasState.update(currentIdeas => 
       currentIdeas.map(idea => idea.ideaID === updatedIdea.ideaID ? updatedIdea : idea)
     )

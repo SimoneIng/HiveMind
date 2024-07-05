@@ -2,9 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { AuthService } from '../../_services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../_services/user/user.service';
-import { IdeaComponent } from '../idea/idea.component';
-import { BackendService } from '../../_services/backend/backend.service';
-import { IdeaWithUsers } from '../../_models/IdeaWithUsers.type';
 import { IdeasComponent } from '../ideas/ideas.component';
 
 @Component({
