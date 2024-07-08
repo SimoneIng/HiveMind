@@ -3,9 +3,18 @@
 <div class="cursor-pointer max-w-sm px-5 py-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-between items-center">
         <a href="">
-            <img class="w-6 h-auto m-3" src="assets/user-icon.png">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person m-3 dark:fill-white" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+              </svg>  
         </a>
-        <p class="font-medium dark:text-white">{{idea.User.userName}}</p>
+        <div class="flex items-center">
+            <p class="mx-2 font-medium dark:text-white">{{idea.User.userName}}</p>
+            <button class="ml-3 py-1.5 px-1.5 rounded-lg border-2 border-gray-500 hover:border-red-400" [hidden]="showDeleteButton()" (click)="deleteIdeaAction()">
+                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>          
+            </button>
+        </div>
     </div>
     <div>
         <h3 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{idea.title}}</h3>
@@ -13,7 +22,7 @@
     <div>
         <p class="mb-5 font-normal text-gray-700 dark:text-gray-400">{{idea.description}}</p>
     </div>
-    <div class="flex justify-between items-center mt-4">
+    <div class="flex justify-between items-center my-4">
         <div class="flex">
             <div class="flex items-center px-2">
                 <button (click)="setFeedback(true)">
@@ -41,11 +50,6 @@
             </div>
         </div>
         <p class="text-sm text-gray-400">{{idea.createdAt | date:'short' }}</p>
-    </div>
-    <div class="flex justify-end pt-4">
-        <button [hidden]="showDeleteButton()" (click)="deleteIdea()" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-            Delete
-        </button>
     </div>
 </div>
 

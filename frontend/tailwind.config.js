@@ -28,7 +28,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+          mono: ['"Ubuntu Mono"', 'monospace'],
       }
     }, 
   }, 

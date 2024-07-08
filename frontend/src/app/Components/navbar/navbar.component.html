@@ -1,9 +1,9 @@
-<header class="light- px-1">
+<header class="dark:text-gray-50 px-1">
     <nav class="p-4">
         <div class="flex items-center justify-between ">
             <div class="flex items-center">
                 <a routerLink="/Home">
-                    <img class="w-10 h-auto" src="assets/logo.png">
+                <img src="assets/logo.png" class="w-9 h-9" alt="">                  
                 </a>
                 <a routerLink="/Home" class="font-semibold text-xl ml-2">HiveMind</a>
             </div>
@@ -16,19 +16,21 @@
                     <a routerLink="/Login" class="m-3 text-sm font-semibold">Login</a>
                     <a routerLink="/SignUp" class="m-3 text-sm font-semibold">Sign Up</a>
                 }
-                <app-theme-toggle></app-theme-toggle>
+                <app-theme-toggle class="mx-3"></app-theme-toggle>
                 <a href="">
-                    <img class="w-6 h-auto m-3" src="assets/user-icon.png"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                      </svg>    
                 </a>
             </div>
             <div class="md:hidden">
                 <button (click)="toggleNavbarMenu()">
                     @if(navbarIsOpen) {
-                        <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-[32px] h-[32px] text-gray-800 dark:fill-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                         </svg>                          
                     } @else {
-                        <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-[32px] h-[32px] text-gray-800 dark:fill-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
                         </svg>                          
                     }                      
@@ -45,7 +47,11 @@
                 <a routerLink="/SignUp" class="m-3 text-sm font-semibold">Sign Up</a>                
             }
             <app-theme-toggle></app-theme-toggle>
-            <a routerLink="/Profile"> <img class="w-6 h-auto m-3" src="assets/user-icon.png"> </a>
+            <a routerLink="/Profile"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                  </svg>                
+            </a>
         </div>
     </nav>
 </header>

@@ -84,6 +84,22 @@ export class IdeaComponent {
     })
   }
 
+  deleteIdeaAction(){
+    Swal.fire({
+      title: "Attenzione",
+      text: "Stai per cancellare la tua Idea",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Cancella"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteIdea();
+      }
+    });
+  }
+ 
   openComments(){
 
   }
