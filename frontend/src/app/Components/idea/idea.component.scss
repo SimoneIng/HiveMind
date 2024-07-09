@@ -4,3 +4,12 @@
     transform: scale(1.025);
     transition: 0.5s;
 }
+
+
+.upvoted {
+    fill: green;
+}
+
+.downvoted {
+    fill: red;
+}
