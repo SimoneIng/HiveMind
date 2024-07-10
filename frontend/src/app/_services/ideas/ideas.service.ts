@@ -9,15 +9,9 @@ export class IdeasService {
 
   ideasState: WritableSignal<IdeaExtended[]> = signal<IdeaExtended[]>([])
   
-  
-  length = computed(() => this.getLength())
   ideas = computed(() => this.ideasState())
 
   constructor(){}
-
-  getLength(): number {
-    return this.ideas.length; 
-  }
 
   setIdeas(response: GenericGetResponse) {
     this.ideasState.set(response.data as IdeaExtended[])
