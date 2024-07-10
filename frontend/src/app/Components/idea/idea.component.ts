@@ -34,9 +34,16 @@ export class IdeaComponent {
         this.feedbacksService.addFeedback(userFeedback.ideaID, userFeedback.flag)
       }
 
-    }
-    
+  }
 
+  isIdeaOfUser() {
+    if(this.user.userID() === this.idea.userID){
+      return true 
+    } else {
+      return false 
+    }
+  }
+    
   setFeedback(value: boolean){
     this.backend.postFeedback(this.idea.ideaID, value).subscribe({
       next: (response) => {
@@ -50,7 +57,7 @@ export class IdeaComponent {
             icon: "error",
             title: err?.error?.message,
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500
           })
       }, complete: () => {
           Swal.fire({
