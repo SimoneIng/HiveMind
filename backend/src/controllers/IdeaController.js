@@ -11,6 +11,8 @@ class IdeaController {
                     exclude: ['userID','passwordHash']
                 }, 
             }, { model: Comment }, { model: Feedback }
+        ], order: [
+            ['createdAt', 'DESC']
         ]
         })
     }
