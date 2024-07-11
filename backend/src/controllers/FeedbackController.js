@@ -28,14 +28,22 @@ class FeedbackController {
             where: { ideaID: req.params.ideaId }, 
             include: [{ model: Feedback }]
         })
+        console.log(idea)
         
         if(!idea) throw new HttpError(400,'Idea Not Exists')
+
+        // controllare che il feedback non sia dell'utente che ha caricato il post 
+        if(idea.userID == req.userId){
+            console.log("error")
+            throw new HttpError(403, 'Cant Insert Feedbacks on your own Ideas')
+        }
         
         // controlla che il feedback da parte di quell utente non sia stato già inserito 
         idea.Feedbacks.forEach( feedback => {
             if(feedback.userID == req.userId) 
                 throw new HttpError(400, 'You have Already Insert a Feedback to this Idea')
         })
+
 
         const newFeedback = {
             ideaID: req.params.ideaId, 
