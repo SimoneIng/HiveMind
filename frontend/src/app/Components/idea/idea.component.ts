@@ -35,14 +35,6 @@ export class IdeaComponent {
       }
 
   }
-
-  isIdeaOfUser() {
-    if(this.user.userID() === this.idea.userID){
-      return true 
-    } else {
-      return false 
-    }
-  }
     
   setFeedback(value: boolean){
     this.backend.postFeedback(this.idea.ideaID, value).subscribe({
@@ -109,7 +101,8 @@ export class IdeaComponent {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Cancella"
+      confirmButtonText: "Cancella",
+      cancelButtonText: "Annulla"
     }).then((result) => {
       if (result.isConfirmed) {
         this.deleteIdea();
