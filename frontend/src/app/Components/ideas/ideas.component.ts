@@ -1,9 +1,13 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BackendService } from '../../_services/backend/backend.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
 import { IdeaComponent } from '../idea/idea.component';
 import { IdeasPaginationComponent } from '../ideas-pagination/ideas-pagination.component';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
+import Swal from 'sweetalert2'; 
+import { AuthService } from '../../_services/auth/auth.service';
+import { UserService } from '../../_services/user/user.service';
 
 @Component({
   selector: 'app-ideas',
@@ -15,7 +19,10 @@ import { IdeaExtended } from '../../_models/IdeaExtended.type';
 export class IdeasComponent implements OnInit{
 
   backend = inject(BackendService)
+  user = inject(UserService)
+  auth = inject(AuthService)
   ideasService = inject(IdeasService)
+  router = inject(Router)
 
   ideasPerPage: number = 10; 
   ideasLength: number = 0; 
@@ -31,6 +38,13 @@ export class IdeasComponent implements OnInit{
       }, 
       error: err => {
         console.log(err)
+        Swal.fire({
+          icon: "error",
+          title: "Errore nel caricare i dati, riprovare più tardi",
+          timer: 1500
+        })
+        this.auth.updateAuthStateOnLogout(); 
+        this.user.updateUserOnLogout(); 
       }, 
       complete: () => {
         this.ideas = this.ideasService.ideas(); 
@@ -53,15 +67,37 @@ export class IdeasComponent implements OnInit{
   
 
   sortItems(){
+    console.log(`Sorting: ${this.sortOption}`)
     switch(this.sortOption){
-      case 'MostControvert-Ideas': 
-        
-      break; 
-      case 'Mainstream-Ideas': 
+      case 'MostControvert-Ideas': // ordinamento in base a chi ha il saldo upvotes/downvotes più basso, ma con il maggior numero di upvotes e downvotes
+        this.ideas.sort((a, b) => {
+          const aBalance = a.upVotes - a.downVotes; 
+          const bBalance = b.upVotes - b.downVotes;
 
-      break; 
-      case 'Unpopular-Ideas': 
+          const balance = aBalance - bBalance; 
 
+          if(balance !== 0) return balance; 
+
+          const aTotalVotes = a.upVotes + a.downVotes; 
+          const bTotalVotes = b.upVotes + a.upVotes; 
+          return bTotalVotes - aTotalVotes; 
+        })        
+      break; 
+      case 'Mainstream-Ideas': // ordinamento in base a chi ha il saldo upvotes/downvotes più alto
+        this.ideas.sort((a, b) => {
+          const aBalance = a.upVotes - a.downVotes; 
+          const bBalance = b.upVotes - b.downVotes;
+
+          return bBalance - aBalance; 
+        })
+      break; 
+      case 'Unpopular-Ideas': // ordinamento in base a chi ha il saldo upvotes/downvotes più basso 
+        this.ideas.sort((a, b) => {
+          const aBalance = a.upVotes - a.downVotes; 
+          const bBalance = b.upVotes - b.downVotes;
+
+          return aBalance - bBalance; 
+        })
       break; 
       default: 
     }

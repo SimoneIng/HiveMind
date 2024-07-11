@@ -15,7 +15,7 @@
     @for (idea of this.pagedIdeas; track idea.ideaID) {
         <app-idea [idea]="idea"></app-idea>
     }
-    <app-ideas-pagination class="fixed bottom-5"
+    <app-ideas-pagination class="fixed bottom-5 left-1/2 transform -translate-x-1/2"
       [totalItems]="this.ideas.length"
       [pageItemsNumber]="this.ideasPerPage"
       (pageChanged)="onPageChanged($event)"
