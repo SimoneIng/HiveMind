@@ -29,7 +29,6 @@ export class IdeasPaginationComponent implements OnChanges {
   changePage(page: number){
     if(page >= 1 && page <= this.totalPages){
       this.currentPage = page; 
-      console.log("emitting value")
       this.pageChanged.emit(this.currentPage); 
     }
   }

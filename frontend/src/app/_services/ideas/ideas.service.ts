@@ -1,6 +1,7 @@
 import { Injectable, computed, signal, WritableSignal, inject } from '@angular/core';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { GenericGetResponse } from '../../_models/GenericGetResponse.type';
+import { Comment } from '../../_models/Comment.type';
 
 @Injectable({
   providedIn: 'root'

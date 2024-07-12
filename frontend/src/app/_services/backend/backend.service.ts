@@ -52,9 +52,9 @@ export class BackendService {
     return this.http.get<GenericGetResponse>(url, this.httpOptions)
   }
 
-  postComments(ideaId: string, comment: object){
+  postComments(ideaId: string, commentDescription: string){
     const url = `${this.backendUrl}/ideas/${ideaId}/comments`;
-    return this.http.post<GenericResponse>(url, comment, this.httpOptions)
+    return this.http.post<GenericResponse>(url, { description: commentDescription }, this.httpOptions)
   }
 
   deleteComment(ideaId: string, commentId: string){

@@ -1,4 +1,4 @@
-import { Component, Input, inject, computed, effect, OnInit } from '@angular/core';
+import { Component, Input, inject, computed, Output, EventEmitter } from '@angular/core';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { UserService } from '../../_services/user/user.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
@@ -7,22 +7,26 @@ import { RouterLink } from '@angular/router';
 import { BackendService } from '../../_services/backend/backend.service';
 import Swal from 'sweetalert2';
 import { FeedbacksService } from '../../_services/feedbacks/feedbacks.service';
-
+import { CommentsSectionComponent } from "../comments-section/comments-section.component";
+import { Comment } from '../../_models/Comment.type';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, CommentsSectionComponent],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
 export class IdeaComponent {
   @Input({required: true}) idea: IdeaExtended; 
+  @Output() ideaDeleted: EventEmitter<string> = new EventEmitter<string>() 
 
   user = inject(UserService)
   backend = inject(BackendService)
   ideasService = inject(IdeasService)
   feedbacksService = inject(FeedbacksService)
+
+  isCommentsSectionOpen: boolean = false; 
 
   upvoteIsSet = computed(() => this.feedbacksService.getUpvoteFeedback(this.idea.ideaID))
   downvoteIsSet = computed(() => this.feedbacksService.getDownVoteFeedback(this.idea.ideaID))
@@ -57,7 +61,7 @@ export class IdeaComponent {
             title: "Hai inserito un Feedback",
             showConfirmButton: false, 
             timer: 1500 
-        })
+          })
       }
     })
   }
@@ -89,6 +93,7 @@ export class IdeaComponent {
             showConfirmButton: false, 
             timer: 1500 
           })
+          this.ideaDeleted.emit(this.idea.ideaID)
       }
     })
   }
@@ -110,7 +115,18 @@ export class IdeaComponent {
     });
   }
  
-  openComments(){
+  toggleCommentsSection(){
+    this.isCommentsSectionOpen = !this.isCommentsSectionOpen; 
+    console.log(this.idea); 
+  }
+
+  updateIdeaAfterCommentCreated(newComment: Comment){
+    this.idea.Comments.push(newComment); 
+    this.idea.commentsNumber++; 
+    this.ideasService.updateIdea(this.idea); 
+  }
+
+  updateIdeaAfterCommentDeleted(deletedComment: Comment){
 
   }
 

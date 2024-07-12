@@ -35,6 +35,7 @@ export class IdeasComponent implements OnInit{
     this.backend.getIdeas().subscribe({
       next: (response) => {
         this.ideasService.setIdeas(response)
+        console.log(response)
       }, 
       error: err => {
         console.log(err)
@@ -107,6 +108,12 @@ export class IdeasComponent implements OnInit{
   changeSortOption(option: string){
     this.sortOption = option; 
     this.sortItems(); 
+  }
+
+  onIdeaDeleted(ideaID: string){
+    // già aggiornato il service in Idea Component 
+    this.ideas = this.ideasService.ideas()
+    this.updatePagedIdeas(); 
   }
 
 }

@@ -1,1 +1,18 @@
-<p>comment works!</p>
+
+
+<div class="flex justify-between border-t border-gray-700">
+    <div class="flex flex-col">
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person m-3 dark:fill-white" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+            </svg> 
+            <p class="mx-2" >{{comment.User.userName}}</p>
+            <p class="mx-2" >{{comment.createdAt | date:'short' }}</p>
+        </div>
+        <p class="mb-2 mt-1 mx-4 text-gray-400" >{{comment.description}}</p>
+    </div>
+    @if(comment.userID == user.userID()){
+        <button (click)="deleteComment()" >Cancella</button>
+    }
+</div>
+

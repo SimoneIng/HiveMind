@@ -49,6 +49,9 @@ export class UserService {
     else return [] as Idea[]; 
   }
 
+  getProfileImagePath(){
+    return ''; // da aggiornare
+  }
 
   updateUserOnLogin(httpResponse: LoginResponse): void {
     console.log(httpResponse)
