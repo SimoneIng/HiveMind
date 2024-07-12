@@ -38,19 +38,27 @@ class CommentController {
 
         try {
             
-            Comment.create(newComment, {transaction: t})
+            const createdComment = await Comment.create(newComment, {transaction: t})
 
             idea.commentsNumber++; 
             await idea.save({transaction: t}); 
-
             await t.commit(); 
+
+            const comment = await Comment.findOne({
+                where: { commentID: createdComment.commentID },
+                include: {model: User, attributes: {exclude: ['userID', 'passwordHash']}}
+            })
+
+            console.log("comment: ", comment); 
+            return comment; 
+
         } catch (err) {
             console.log(err)
             await t.rollback(); 
             throw new HttpError(503, 'Comment Not Uploaded, Try Later.')
         }
 
-        return newComment; 
+        
         
     }
 

@@ -10,7 +10,8 @@ class IdeaController {
                 attributes: {
                     exclude: ['userID','passwordHash']
                 }, 
-            }, { model: Comment }, { model: Feedback }
+            }, { model: Comment, include: [{ model: User, attributes: { exclude: ['userID', 'passwordHash'] } }] }, 
+            { model: Feedback }
         ], order: [
             ['createdAt', 'DESC']
         ]
