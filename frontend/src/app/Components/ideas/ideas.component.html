@@ -13,7 +13,10 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
     @for (idea of this.pagedIdeas; track idea.ideaID) {
-        <app-idea [idea]="idea" (ideaDeleted)="onIdeaDeleted($event)"></app-idea>
+        <app-idea [idea]="idea" 
+          (ideaDeleted)="onIdeaDeleted($event)" 
+        >
+        </app-idea>
     }
     <app-ideas-pagination class="fixed bottom-5 left-1/2 transform -translate-x-1/2"
       [totalItems]="this.ideas.length"

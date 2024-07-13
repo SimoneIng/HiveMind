@@ -1,7 +1,8 @@
-import { Component, inject, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { UserService } from '../../_services/user/user.service';
 import { Comment } from '../../_models/Comment.type';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-comment',
@@ -13,20 +14,26 @@ import { CommonModule } from '@angular/common';
 export class CommentComponent {
 
   @Input({required: true}) comment: Comment; 
+  @Output() deleteCommentEvent = new EventEmitter<string>();  
 
   user = inject(UserService); 
-  isCommentOfLoggedUser = signal<boolean>(false)
-  
-  onInit(){
-    console.log(this.user.userID())
-    console.log(this.comment.userID)
-    if(this.user.userID() === this.comment.userID){
-      this.isCommentOfLoggedUser.set(true)
+
+
+  deleteComment(){
+    if(this.user.userID() != this.comment.userID){
+      Swal.fire({
+        icon: "error",
+        text: "Non puoi cancellare un commento non tuo..",
+        timer: 1500 
+      })
+    } else {
+      this.deleteCommentEvent.emit(this.comment.commentID); 
     }
   }
 
-  deleteComment(){
-    console.log("Deleting Comment")
+  isCommentOfLoggedUser(){
+    if(this.user.userID() != this.comment.userID) return true 
+    return false
   }
 
 }

@@ -20,6 +20,7 @@ export class CommentsSectionComponent {
   @Input({required: true}) ideaID: string; 
   @Output() close = new EventEmitter<void>();
   @Output() commentCreated = new EventEmitter<Comment>(); 
+  @Output() commentDeleted = new EventEmitter<string>(); 
 
   user = inject(UserService); 
   backend = inject(BackendService); 
@@ -27,7 +28,7 @@ export class CommentsSectionComponent {
 
   commentForm = new FormGroup({
     commentText: new FormControl('',
-      [Validators.minLength(1), Validators.maxLength(20)]), 
+      [Validators.minLength(1), Validators.maxLength(70)]), 
   }) 
 
 
@@ -37,10 +38,11 @@ export class CommentsSectionComponent {
 
   postNewCommentAction(){
     if(this.commentForm.valid){
-      const commentText = this.commentForm.value.commentText; 
+      let commentText = this.commentForm.value.commentText; 
       console.log(commentText); 
       if(commentText != undefined){
         this.postNewComment(commentText); 
+        this.commentForm.get('commentText')?.setValue(''); 
       } else {
         Swal.fire({
           icon: "error", 
@@ -72,6 +74,31 @@ export class CommentsSectionComponent {
           title: "Commento Caricato...",
           showConfirmButton: false, 
           timer: 1500 
+        })
+      }
+    })
+  }
+
+  deleteComment(commentID: string){
+    this.backend.deleteComment(this.ideaID, commentID).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.commentDeleted.emit(commentID); 
+      }, 
+      error: err => {
+        console.log(err)
+        Swal.fire({
+          icon: "error", 
+          text: err?.error?.message,
+          timer: 1500 
+        })
+      }, 
+      complete: () => {
+        Swal.fire({
+          icon: "success", 
+          text: "Commento Cancellato",
+          timer: 1500, 
+          showConfirmButton: false
         })
       }
     })

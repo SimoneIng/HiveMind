@@ -126,8 +126,11 @@ export class IdeaComponent {
     this.ideasService.updateIdea(this.idea); 
   }
 
-  updateIdeaAfterCommentDeleted(deletedComment: Comment){
-
+  updateIdeaAfterCommentDeleted(commentID: string){
+    const index = this.idea.Comments.findIndex(comment => comment.commentID == commentID)
+    if(index !== -1) this.idea.Comments.splice(index, 1); 
+    this.idea.commentsNumber--; 
+    this.ideasService.updateIdea(this.idea); 
   }
 
 }

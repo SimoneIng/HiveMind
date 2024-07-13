@@ -58,7 +58,7 @@ export class BackendService {
   }
 
   deleteComment(ideaId: string, commentId: string){
-    const url = `${this.backendUrl}/idea/${ideaId}/comments/${commentId}`;
+    const url = `${this.backendUrl}/ideas/${ideaId}/comments/${commentId}`;
     return this.http.delete<GenericResponse>(url, this.httpOptions)
   }
 

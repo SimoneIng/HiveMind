@@ -6,7 +6,7 @@
 </div>
     <div class="p-4 max-h-60 overflow-y-auto scroll-container">
         @for(comment of comments; track comment.commentID){
-            <app-comment [comment]="comment"></app-comment>
+            <app-comment [comment]="comment" (deleteCommentEvent)="deleteComment($event)"></app-comment>
         }
         @empty {
             <p>Ancora Nessun Commento...</p>

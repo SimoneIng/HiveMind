@@ -57,6 +57,7 @@
 @if(isCommentsSectionOpen){
     <app-comments-section [ideaID]="idea.ideaID" [comments]="idea.Comments" 
     (close)="toggleCommentsSection()" (commentCreated)="updateIdeaAfterCommentCreated($event)" 
+    (commentDeleted)="updateIdeaAfterCommentDeleted($event)"
         class="fixed z-50 inset-x-0 bottom-0 rounded-t-md dark:bg-gray-800 shadow-lg">
     </app-comments-section>
 }
