@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { FeedbacksService } from '../../_services/feedbacks/feedbacks.service';
 import { CommentsSectionComponent } from "../comments-section/comments-section.component";
 import { Comment } from '../../_models/Comment.type';
+import { CommentSectionService } from '../../_services/commentSection/comment-section.service';
 
 @Component({
   selector: 'app-idea',
@@ -25,6 +26,7 @@ export class IdeaComponent {
   backend = inject(BackendService)
   ideasService = inject(IdeasService)
   feedbacksService = inject(FeedbacksService)
+  commentSectionService = inject(CommentSectionService)
 
   isCommentsSectionOpen: boolean = false; 
 
@@ -115,9 +117,20 @@ export class IdeaComponent {
     });
   }
  
-  toggleCommentsSection(){
-    this.isCommentsSectionOpen = !this.isCommentsSectionOpen; 
-    console.log(this.idea); 
+  toggleCommentsSection(){ // obiettivo: Evitare l'apertura contemporanea di più commentSections 
+    if(this.isCommentsSectionOpen){ // sezione commenti è aperta, la devo chiudere 
+      this.isCommentsSectionOpen = false;  
+      // imposto il signal all'interno del service a false, per indicare che ho chiuso la sezione commenti
+      this.commentSectionService.aCommentSectionIsOpen.set(false); 
+    } else { // sezione commenti è chiusa : la devo aprire 
+      // controllare se non ce ne sia un'altra già aperta 
+      if(!this.commentSectionService.aCommentSectionIsOpen()){ // se nessuna sezione commenti è aperta 
+        // impostare il signal a true per indicare che qualcuno ha aperto la sezione commenti
+        this.commentSectionService.aCommentSectionIsOpen.set(true); 
+        // apro la sezione commenti 
+        this.isCommentsSectionOpen = true; 
+      }
+    }
   }
 
   updateIdeaAfterCommentCreated(newComment: Comment){
