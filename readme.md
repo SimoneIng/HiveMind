@@ -52,7 +52,7 @@ visualizzare i commenti lasciati da altri utenti nella pagina di dettaglio di ci
 ```
 DB_NAME = "hivemind"
 DB_USER = "postgres"
-DB_PSW = "<postgres password you chooce earlier>"
+DB_PSW = "<postgres password you chosen earlier>"
 DB_PORT = "5432"
 DB_SCHEMA = "app"
 HOST = "localhost"
