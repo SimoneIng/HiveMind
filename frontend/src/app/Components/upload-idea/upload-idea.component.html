@@ -1,2 +1,86 @@
 
 
+<!-- idea-upload.component.html -->
+
+<section class="flex items-center justify-center h-full">
+    <div class="flex flex-col items-center">
+        <p class="text-xl">Carica Nuova Idea...</p>
+        <form [formGroup]="uploadIdeaForm" (ngSubmit)="uploadIdea()" method="post">
+            <div class="m-4">
+                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titolo</label>
+                <input formControlName="title" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="..." required />
+            </div>
+            <div  class="my-3 bg-slate-800 rounded-sm">
+                <markdown ngPreserveWhitespaces  
+                [data]="this.uploadIdeaForm.value.description">
+                    Markdwon Preview...
+                </markdown>
+            </div>
+            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+                    <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600">
+                        <div class="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
+                            <button (click)="headingToggle(1)" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                H1
+                            </button>
+                            <span class="sr-only">Heading 1</span>
+                            <button (click)="headingToggle(2)" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                H2
+                            </button>
+                            <span class="sr-only">Heading 2</span>
+                            <button (click)="headingToggle(3)" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                H3
+                            </button>
+                            <span class="sr-only">Heading 3</span>
+                        </div>
+                        <div class="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
+                            <button (click)="boldToggle()" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5h4.5a3.5 3.5 0 1 1 0 7H8m0-7v7m0-7H6m2 7h6.5a3.5 3.5 0 1 1 0 7H8m0-7v7m0 0H6"/>
+                                </svg>                                  
+                            </button>
+                            <span class="sr-only">Bold</span>
+                            <button (click)="italicToggle()" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.874 19 6.143-14M6 19h6.33m-.66-14H18"/>
+                                </svg>       
+                            </button>
+                            <span class="sr-only">Italic</span>                           
+                            <button (click)="unOrderedListToggle()" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"/>
+                                </svg>   
+                            </button>                               
+                            <span class="sr-only">List</span>
+                            <button (click)="codeToggle()" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"/>
+                                </svg>    
+                            </button>
+                            <span class="sr-only">Code</span>
+                        </div>
+                        <div class="flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4">
+                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4"/>
+                                </svg>                                  
+                            </button>
+                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 9H8a5 5 0 0 0 0 10h9m4-10-4-4m4 4-4 4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                    <textarea #descriptionTextArea (keyup)="getSelectedText($event)" (touchend)="getSelectedText($event)" (mouseup)="getSelectedText($event)" formControlName="description" rows="12" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Descrizione..."></textarea>
+                </div>
+            </div>
+            <button [disabled]="!uploadIdeaForm.valid" [class.disabled-button]="!uploadIdeaForm.valid" type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                Pubblica Idea
+            </button>
+        </form>
+    </div>
+</section>
+  

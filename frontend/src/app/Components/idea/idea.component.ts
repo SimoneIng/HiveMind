@@ -10,11 +10,12 @@ import { FeedbacksService } from '../../_services/feedbacks/feedbacks.service';
 import { CommentsSectionComponent } from "../comments-section/comments-section.component";
 import { Comment } from '../../_models/Comment.type';
 import { CommentSectionService } from '../../_services/commentSection/comment-section.service';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [CommonModule, RouterLink, CommentsSectionComponent],
+  imports: [CommonModule, RouterLink, CommentsSectionComponent, MarkdownComponent],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })

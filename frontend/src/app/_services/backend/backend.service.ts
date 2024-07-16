@@ -14,7 +14,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) {}
 
-  backendUrl: string = 'http://localhost:3000'; 
+  backendUrl: string = 'http://192.168.1.10:3000'; 
  
   httpOptions = {
     headers: new HttpHeaders({
@@ -37,9 +37,9 @@ export class BackendService {
     return this.http.get<GenericGetResponse>(url, this.httpOptions); 
   }
 
-  postIdea(idea: object){
+  postIdea(title: string, description: string){
     const url = `${this.backendUrl}/ideas`;
-    return this.http.post<GenericResponse>(url, this.httpOptions); 
+    return this.http.post<GenericResponse>(url, {title, description}, this.httpOptions); 
   }
 
   deleteIdea(ideaId: string){
