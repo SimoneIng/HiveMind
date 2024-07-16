@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
     res.send("HiveMind Backend App")
 })
 
-app.listen(SERVER_PORT, '192.168.1.10', () => {
+// app.listen(SERVER_PORT, '192.168.1.10', () => {
+//     console.log(`Server running on http://localhost:${SERVER_PORT}`); 
+// })
+
+app.listen(SERVER_PORT, () => {
     console.log(`Server running on http://localhost:${SERVER_PORT}`); 
 })

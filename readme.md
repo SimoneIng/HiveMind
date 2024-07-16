@@ -25,22 +25,44 @@ Tramite un apposito controllo, è possibile visualizzare le idee più unpopular,
 Per favorire la discussione, gli utenti possono anche inserire commenti a una specifica idea e
 visualizzare i commenti lasciati da altri utenti nella pagina di dettaglio di ciascuna idea.
 
+## Prerequisiti 
+
+- Node.js (versione ) []
+- Angular (versione ) []
+- 
 
 ## Installazione 
 
-Da terminale: Eseguire il Comando `gh repo clone SimoneIng/HiveMind` 
+1. **Clone Repository** `gh repo clone SimoneIng/HiveMind` 
 
-1. `cd HiveMind`
+2. **Move to HiveMind Main Directory** `cd HiveMind`
+
+### Setup Database 
+
+> If you have already installed postgres on your machine you can also create the database as you like, then modify the `env` file in backend directory.
+
+1. Install postgres with `sudo apt install postgres`
+2. Modify password of user postgres `sudo passw postgres`
+3. Run the Database Server `sudo service postgresql start`
+4. Modify password of user postgres (on database) with `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'admin';"`
+5. Run `psql`. 
+6. Run `CREATE DATABASE hivemind;`
+
+```
+DB_NAME = "hivemind"
+DB_USER = "postgres"
+DB_PSW = "password"
+DB_PORT = "5432"
+DB_SCHEMA = "app"
+HOST = "localhost"
+SERVER_PORT="3000"
+JWT_SECRET = "84e94c6798ba4d9fdea2caff95c167937c6ea7a42be5dbb368ed870c66c7ede4ac23
+046d08fe57e459b13df54f4ef14e255981e6e4c01116ea5b1e7afaa8cbc7"
+```
 
 ### Setup Backend 
 
-Da terminale: 
-
-1. Sposati nella cartella Backend : `cd backend`
-2. Installazzione delle dependecies : `npm install`
-3. Setup del Database : `npm run dbsetup`
-4. Riempire il Database : `npm run filldb`
-5. Avviare il Backend : `npm run start`
-
-### Setup Frontend 
+1. Move to backend Directory `cd backend`
+2. Run `npm install` to install all the dependencies. 
+3. Run 
 

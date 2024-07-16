@@ -35,12 +35,10 @@ export class IdeaComponent {
   downvoteIsSet = computed(() => this.feedbacksService.getDownVoteFeedback(this.idea.ideaID))
 
   ngOnInit(){
-
       const userFeedback = this.idea.Feedbacks.find(feedback => feedback.userID == this.user.userID())
       if(userFeedback){
         this.feedbacksService.addFeedback(userFeedback.ideaID, userFeedback.flag)
       }
-
   }
     
   setFeedback(value: boolean){
