@@ -47,11 +47,12 @@ visualizzare i commenti lasciati da altri utenti nella pagina di dettaglio di ci
 4. Modify password of user postgres (on database) with `sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'admin';"`
 5. Run `psql`. 
 6. Run `CREATE DATABASE hivemind;`
+7. Run `\c hivemind` then `CREATE SCHEMA app;` 
 
 ```
 DB_NAME = "hivemind"
 DB_USER = "postgres"
-DB_PSW = "password"
+DB_PSW = "<postgres password you chooce earlier>"
 DB_PORT = "5432"
 DB_SCHEMA = "app"
 HOST = "localhost"
@@ -64,5 +65,13 @@ JWT_SECRET = "84e94c6798ba4d9fdea2caff95c167937c6ea7a42be5dbb368ed870c66c7ede4ac
 
 1. Move to backend Directory `cd backend`
 2. Run `npm install` to install all the dependencies. 
-3. Run 
+3. Run `npm run dbsetup` to setup the database. 
+4. Run `npm run filldb` to create some users and ideas.
+5. Now you can finally run the server with `npm run start`. 
 
+### Setup Frontend 
+
+1. From Root Directory, move to frontend `cd frontend`
+2. Run `npm install`
+3. Run `ng serve`
+4. Go to http://localhost:4200 and enjoy. 
