@@ -1,3 +1,4 @@
+import { IdeaExtended } from "./IdeaExtended.type"
 import { User } from "./User.type"
 
 export interface LoginResponse {
@@ -5,7 +6,8 @@ export interface LoginResponse {
     user: {
         userID: string, 
         userName: string, 
-        Ideas: [] 
+        profileImagePath: string, 
+        Ideas: IdeaExtended [] 
     }, 
     token: string 
 }

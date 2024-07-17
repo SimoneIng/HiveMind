@@ -4,8 +4,8 @@ import { Idea } from "./Idea.type";
 
 export interface IdeaExtended extends Idea {
     User: {
-        userName: string, 
-        profileImagePath: string
+        userName: string | null, 
+        profileImagePath: string | null 
     },
     Comments: Comment []
     Feedbacks: Feedback [] 

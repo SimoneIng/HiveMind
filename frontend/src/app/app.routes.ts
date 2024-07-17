@@ -3,6 +3,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { UploadIdeaComponent } from './Components/upload-idea/upload-idea.component';
+import { UserPageComponent } from './Components/user-page/user-page.component';
+import { authGuard } from './_guards/AuthGuard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -13,7 +15,7 @@ export const routes: Routes = [
     {
         path: 'Login', 
         component: LoginComponent, 
-        title: 'HiveMind Login'
+        title: 'HiveMind Login',
     },
     {
         path: "", 
@@ -28,6 +30,13 @@ export const routes: Routes = [
     {
         path:'UploadIdea',
         component: UploadIdeaComponent, 
-        title: 'Upload new Idea'
+        title: 'Upload new Idea',
+        canActivate: [authGuard]
+    },
+    {
+        path:'UserProfile',
+        component: UserPageComponent,
+        title: 'User Page',
+        canActivate: [authGuard]
     }
 ];

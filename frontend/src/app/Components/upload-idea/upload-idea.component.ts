@@ -7,6 +7,8 @@ import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MarkdownModule } from 'ngx-markdown';
+import { Idea } from '../../_models/Idea.type';
+import { GenericResponse } from '../../_models/GenericResponse.type';
 
 @Component({
   selector: 'app-upload-idea',
@@ -102,6 +104,18 @@ export class UploadIdeaComponent {
     }
   }
 
+  updateLocalStorageOnIdeaUploaded(response: GenericResponse){
+    const ideas = this.userService.getIdeas(); 
+    const newIdea = {
+      ...response.data as Idea , 
+      User: {
+        userName: this.userService.getUsername(),
+        profileImagePath: this.userService.getProfileImagePath()
+      }, Comments: [], Feedbacks: [], 
+    }
+    ideas.push(newIdea); 
+    localStorage.setItem("User-Ideas", JSON.stringify(ideas)); 
+  }
   
   uploadIdea() {
     if(!this.uploadIdeaForm.invalid){
@@ -110,6 +124,8 @@ export class UploadIdeaComponent {
       this.backendService.postIdea(title, description).subscribe({
         next: (response) => {
           console.log(response)
+          // aggiornare il localStorage 
+          this.updateLocalStorageOnIdeaUploaded(response); 
         },
         error: err => {
           Swal.fire({
@@ -131,5 +147,7 @@ export class UploadIdeaComponent {
       this.router.navigateByUrl("/Home"); 
     }
   }
+
+
 
 }

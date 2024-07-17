@@ -1,7 +1,8 @@
-import { Idea } from "./Idea.type";
+import { IdeaExtended } from "./IdeaExtended.type"
 
 export interface User {
     userID: string | null, 
     username: string | null, 
-    ideas: Idea[] | null 
+    profileImagePath: string | null, 
+    ideas: IdeaExtended[] | null 
 }

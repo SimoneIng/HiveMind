@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal, effect, computed } from '@angular/core';
 import { User } from '../../_models/User.type';
-import { Idea } from '../../_models/Idea.type';
+import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { LoginResponse } from '../../_models/LoginResponse.type';
 
 @Injectable({
@@ -12,11 +12,13 @@ export class UserService {
   loggedUser: WritableSignal<User> = signal<User>({
     userID: this.getUserID(), 
     username: this.getUsername(), 
-    ideas: this.getIdeas()
+    ideas: this.getIdeas(),
+    profileImagePath: this.getProfileImagePath() 
   })
 
   userID = computed(() => this.loggedUser().userID)
   username = computed(() => this.loggedUser().username)
+  profileImagePath = computed(() => this.loggedUser().profileImagePath)
   ideas = computed(() => this.loggedUser().ideas)
 
   constructor(){
@@ -24,6 +26,7 @@ export class UserService {
       const username = this.loggedUser().username; 
       const ideas = this.loggedUser().ideas; 
       const userID = this.loggedUser().userID; 
+      const profileImagePath = this.loggedUser().profileImagePath; 
 
       if(username != null){
         localStorage.setItem("Username", username)
@@ -43,7 +46,17 @@ export class UserService {
         localStorage.removeItem("User-Ideas")
       }
 
+      if(profileImagePath != null){
+        localStorage.setItem('ProfileImagePath', profileImagePath)
+      } else {
+        localStorage.removeItem("ProfileImagePath")
+      }
+
     })
+  }
+
+  getProfileImagePath(){
+    return localStorage.getItem("ProfileImagePath"); 
   }
 
   getUserID(){
@@ -55,13 +68,9 @@ export class UserService {
   }
 
   getIdeas(){
-    const ideas = localStorage.getItem("Ideas"); 
-    if(ideas != null) return JSON.parse(ideas); 
-    else return [] as Idea[]; 
-  }
-
-  getProfileImagePath(){
-    return ''; // da aggiornare
+    const ideas = localStorage.getItem("User-Ideas"); 
+    if(ideas != null) return JSON.parse(ideas) as IdeaExtended[]; 
+    else return []; 
   }
 
   updateUserOnLogin(httpResponse: LoginResponse): void {
@@ -69,15 +78,17 @@ export class UserService {
     this.loggedUser.set({
       userID: httpResponse.user.userID, 
       username: httpResponse.user.userName, 
-      ideas: httpResponse.user.Ideas
+      profileImagePath: httpResponse.user.profileImagePath,  
+      ideas: httpResponse.user.Ideas,
     })
   }
 
   updateUserOnLogout(){
     this.loggedUser.set({
-      userID: '', 
+      userID: null, 
       username: null, 
-      ideas: [] 
+      profileImagePath: null, 
+      ideas: null 
     })
   }
 
