@@ -1,4 +1,4 @@
-import { Idea, User } from "../models/index.js";
+import { Idea, User, Feedback, Comment } from "../models/index.js";
 import { JWT_SECRET } from '../config/environment.js'; 
 import bcrypt from 'bcrypt'; 
 import jwt from 'jsonwebtoken'; 
@@ -9,14 +9,34 @@ class AuthController {
 
 
     static async checkCredentials(req){
-         const user = await User.findOne({
+
+        const user = await User.findOne({
             where: {
-                userName: req.body.usr, 
+                userName: req.body.usr,
             },
             include: [{
-                model: Idea
-            }]
-        })
+                model: Idea,
+                include: [
+                    {
+                        model: Comment,
+                        include: [
+                            {
+                                model: User,
+                                attributes: {
+                                    exclude: ['userID', 'passwordHash']
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        model: Feedback
+                    }, 
+                    {
+                        model: User, attributes: { exclude: ['userID','passwordHash'] }
+                    }
+                ]
+            }], 
+        });
 
         if(!user) return null; 
 
@@ -27,7 +47,6 @@ class AuthController {
         else return null; 
 
     }
-
     
     static async saveNewUser(req, res){
 
