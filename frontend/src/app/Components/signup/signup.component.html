@@ -14,10 +14,10 @@
             <label for="username" class="block text-sm font-medium leading-6 ">Username</label>
             @if(signUpForm.controls.password.errors){
               @if(signUpForm.controls.password.errors['required']){
-                <p class="text-sm leading-6 text-red-400">Password is required.</p>
+                <p class="text-sm leading-6 text-red-400">Username is required.</p>
               }
               @if(signUpForm.controls.password.errors['minLength']){
-                <p class="text-sm leading-6 text-red-400">Password too short</p>
+                <p class="text-sm leading-6 text-red-400">Username too short</p>
               }
             }
           </div>

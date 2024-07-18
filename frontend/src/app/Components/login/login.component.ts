@@ -50,11 +50,11 @@ export class LoginComponent {
           this.auth.updateAuthStateOnLogin(response)
           this.user.updateUserOnLogin(response)
         },
-        error: err => {
+        error: err => { 
           // messaggio di errore 
           Swal.fire({
             icon: "error",
-            title: "Credenziali non Valide",
+            title: err?.message,
             showConfirmButton: false, 
             timer: 1500 
           })

@@ -14,7 +14,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) {}
 
-  backendUrl: string = 'http://192.168.1.10:3000'; 
+  backendUrl: string = '/api'; 
  
   httpOptions = {
     headers: new HttpHeaders({

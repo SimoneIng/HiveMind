@@ -73,5 +73,5 @@ JWT_SECRET = "84e94c6798ba4d9fdea2caff95c167937c6ea7a42be5dbb368ed870c66c7ede4ac
 
 1. From Root Directory, move to frontend `cd frontend`
 2. Run `npm install`
-3. Run `ng serve`
+3. Run `npm start`
 4. Go to http://localhost:4200 and enjoy. 
