@@ -1,39 +1,38 @@
-<div class="flex justify-between items-center px-4 pt-4 pb-2">
+<div class="bg-slate-200 dark:bg-slate-800">
+  <div class="flex justify-between items-center px-4 pt-4 pb-2">
     <p>Sezione Commenti</p>
-    <button class="text-gray-500 hover:text-gray-700" (click)="closeCommentsSection()" >
-        Close
+    <button class="text-sm text-gray-500 hover:text-emerald-300" (click)="closeCommentsSection()" >
+      Close
     </button>
+  </div>
+  <div class="p-4 my-2 max-h-[65vh] overflow-y-auto scroll-container">
+    @for(comment of comments; track comment.commentID){
+      <app-comment [comment]="comment" (deleteCommentEvent)="deleteComment($event)"></app-comment>
+    }
+    @empty {
+      <p>Ancora Nessun Commento...</p>
+    }
+  </div>
+  
+  
+  <!-- Form inserimento commento -->
+  <form [formGroup]="commentForm" (ngSubmit)="postNewCommentAction()" class="flex items-center border-t border-gray-700 p-4 dark:bg-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person dark:fill-white" viewBox="0 0 16 16">
+      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+    </svg> 
+    <textarea
+    formControlName="commentText"
+    class="flex-1 border-none rounded-lg p-2 resize-none outline-none text-sm bg-gray-600 mx-2"
+    rows="1"
+    placeholder="Add a comment..."
+    ></textarea>
+    <button 
+    type="submit"
+    class="bg-transparent border-none text-gray-50 font-semibold hover:text-emerald-300"
+    [disabled]="commentForm.invalid"
+    >
+    Post
+    </button>
+  </form>
 </div>
-    <div class="p-4 my-2 max-h-[65vh] overflow-y-auto scroll-container">
-        @for(comment of comments; track comment.commentID){
-            <app-comment [comment]="comment" (deleteCommentEvent)="deleteComment($event)"></app-comment>
-        }
-        @empty {
-            <p>Ancora Nessun Commento...</p>
-        }
-    </div>
-        
-        
-    <!-- Form inserimento commento -->
-    <form [formGroup]="commentForm" (ngSubmit)="postNewCommentAction()" class="flex items-center border-t border-gray-700 p-4 dark:bg-gray-800">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person dark:fill-white" viewBox="0 0 16 16">
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-        </svg> 
-        <textarea
-          formControlName="commentText"
-          class="flex-1 border-none rounded-lg p-2 resize-none outline-none text-sm bg-gray-600 mx-2"
-          rows="1"
-          placeholder="Add a comment..."
-        ></textarea>
-        <button 
-          type="submit"
-          class="bg-transparent border-none text-gray-50 font-semibold"
-          [disabled]="commentForm.invalid"
-        >
-          Post
-        </button>
-      </form>
-      
-
-
 

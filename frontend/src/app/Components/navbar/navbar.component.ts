@@ -23,6 +23,10 @@ export class NavbarComponent {
   toggleNavbarMenu(){
     this.navbarIsOpen = !this.navbarIsOpen; 
   }
+  
+  closeMenuAfterLinkIsClicked(){
+    if(this.navbarIsOpen) this.navbarIsOpen = !this.navbarIsOpen; 
+  }
 
   handleLogout(){
     this.auth.updateAuthStateOnLogout(); 

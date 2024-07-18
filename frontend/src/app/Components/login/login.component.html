@@ -21,7 +21,7 @@
             </div>
             <div class="mt-2">
               <input id="username" name="username" formControlName="username" type="username" autocomplete="username" 
-              class="block w-full pl-2 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required>
             </div>
         </div>
@@ -39,19 +39,22 @@
           </div>
           <div class="mt-2">
             <input id="password" name="password" formControlName="password" type="password" autocomplete="off"
-            class="block w-full pl-2 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required>
           </div>
         </div>
   
         <div>
-          <button [disabled]="!loginForm.valid" [class.disabled-button]="!loginForm.valid"  type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+          <button [disabled]="!loginForm.valid" [class.disabled-button]="!loginForm.valid"  type="submit"
+          class="flex w-full justify-center py-2.5 px-5 me-2 mb-2 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-emerald-400" >
+          Login
+          </button>
         </div>
       </form>
   
       <p class="mt-10 text-center text-sm text-gray-500">
         If you do not have an account 
-        <a routerLink="/SignUp" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign up</a>
+        <a routerLink="/SignUp" class="font-semibold leading-6 text-emerald-400 dark:text-emerald-300 hover:text-gray-400">Sign up</a>
       </p>
     </div>
 </div>
