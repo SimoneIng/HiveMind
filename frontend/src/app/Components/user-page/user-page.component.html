@@ -1,6 +1,6 @@
 
 
-<section class="m-3">
+<section class="h-full m-3">
 
     <!-- User Details... -->
     <div class="flex justify items-center justify-between">
@@ -20,38 +20,41 @@
     </div>
 
     <!-- User Report... -->
-    <div class="flex flex-col sm:flex-row sm:text-xs md:text-sm m-5">
+    <div class="flex flex-col sm:flex-row sm:text-base text-sm m-5">
         <div class="m-1">
             Idee Caricate: {{userIdeas.length}}
         </div>
-        <div class="m-1">
-            Upvotes: {{userUpvotes}}
+        <div class="m-1 flex">
+            Upvotes: <p class="ml-1 text-emerald-400 dark:text-emerald-300">{{userUpvotes}}</p>
         </div>
-        <div class="m-1">
-            Downvotes: {{userDownvotes}}
+        <div class="m-1 flex">
+            Downvotes: <p class="ml-1 text-red-400 dark:text-red-300">{{userDownvotes}}</p> 
         </div>
     </div> 
 
 
     <!-- User Current Ideas.... -->
     <div>
-        <div class="m-3 text-2xl">
-            Le tue Idee
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-            @for (idea of this.userIdeas; track idea.ideaID) {
-                <app-idea 
-                    [idea]="idea"
-                    (ideaDeleted)="onIdeaDeleted($event)"
-                >
-                </app-idea>
-            } 
-            @empty {
-                <a routerLink="/UploadIdea"  class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                    Carica la tua prima Idea
-                </a>
-            }
-        </div>
+        @if(this.userIdeas.length == 0) {
+            <div class="w-full flex justify-center items-center">
+                <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-emerald-400 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-emerald-300">
+                    <a routerLink="/UploadIdea">Carica la tua Prima Idea</a>
+                </button>
+            </div>
+        } @else {
+            <div class="sm:text-2xl text-lg">
+                Le tue Idee
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+                @for (idea of this.userIdeas; track idea.ideaID) {
+                    <app-idea 
+                        [idea]="idea"
+                        (ideaDeleted)="onIdeaDeleted($event)"
+                    >
+                    </app-idea>
+                } 
+            </div>
+        }
     </div>
 
 </section>

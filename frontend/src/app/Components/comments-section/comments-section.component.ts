@@ -28,7 +28,7 @@ export class CommentsSectionComponent {
 
   commentForm = new FormGroup({
     commentText: new FormControl('',
-      [Validators.minLength(1), Validators.maxLength(70)]), 
+      [Validators.minLength(2), Validators.maxLength(70)]), 
   }) 
 
 

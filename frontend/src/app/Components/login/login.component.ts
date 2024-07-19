@@ -26,7 +26,7 @@ export class LoginComponent {
     username: new FormControl('', 
       [Validators.required, Validators.minLength(3), Validators.maxLength(15)]), 
     password: new FormControl('', 
-      [Validators.required, Validators.minLength(6), Validators.maxLength(16)])
+      [Validators.required, Validators.minLength(5), Validators.maxLength(16)])
   })
 
   onLoginSubmit(){
@@ -58,8 +58,6 @@ export class LoginComponent {
           this.user.updateUserOnLogin(response)
         },
         error: err => { 
-          // messaggio di errore 
-          console.log(err);
           Swal.fire({
             icon: "error",
             title: err?.error?.message,

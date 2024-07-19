@@ -3,14 +3,14 @@
 <!-- idea-upload.component.html -->
 
 <section class="flex items-center justify-center h-full">
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center max-w-[50vw]">
         <p class="text-xl">Carica Nuova Idea...</p>
         <form [formGroup]="uploadIdeaForm" (ngSubmit)="uploadIdea()" method="post">
-            <div class="m-4">
-                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titolo</label>
-                <input formControlName="title" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="..." required />
+            <div class="my-4">
+                <label class="block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white">Titolo</label>
+                <input formControlName="title" type="text"  class="w bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-emerald-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-emerald-300" placeholder="..." required />
             </div>
-            <div  class="my-3 bg-slate-800 rounded-sm">
+            <div class="my-3 ml-2 text-base bg-white dark:bg-slate-900 rounded-sm">
                 <markdown ngPreserveWhitespaces  
                 [data]="this.uploadIdeaForm.value.description">
                     Markdwon Preview...
@@ -74,10 +74,14 @@
                     </div>
                 </div>
                 <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
-                    <textarea #descriptionTextArea (keyup)="getSelectedText($event)" (touchend)="getSelectedText($event)" (mouseup)="getSelectedText($event)" formControlName="description" rows="12" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Descrizione..."></textarea>
+                    <textarea #descriptionTextArea (keyup)="getSelectedText($event)" (touchend)="getSelectedText($event)" (mouseup)="getSelectedText($event)" formControlName="description" rows="12" 
+                        class="resize-none block w-full max-w-500px focus:outline-none px-0 text-sm text-gray-800 bg-white dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
+                        placeholder="Descrizione..." wrap="soft">
+                    </textarea>
                 </div>
             </div>
-            <button [disabled]="!uploadIdeaForm.valid" [class.disabled-button]="!uploadIdeaForm.valid" type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+            <button [disabled]="!uploadIdeaForm.valid" [class.disabled-button]="!uploadIdeaForm.valid" type="submit" 
+                class="inline-flex w-full justify-center items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-emerald-400 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-emerald-300">
                 Pubblica Idea
             </button>
         </form>

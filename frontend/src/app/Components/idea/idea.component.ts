@@ -171,6 +171,8 @@ export class IdeaComponent {
     this.idea.Comments.push(newComment); 
     this.idea.commentsNumber++; 
     this.ideasService.updateIdea(this.idea); 
+
+    // update localstorage se il commento creato è su un idea del user loggato
   }
 
   updateIdeaAfterCommentDeleted(commentID: string){
@@ -178,6 +180,8 @@ export class IdeaComponent {
     if(index !== -1) this.idea.Comments.splice(index, 1); 
     this.idea.commentsNumber--; 
     this.ideasService.updateIdea(this.idea); 
+
+    // update localstorage se il commento eliminato è su un idea del user loggato 
   }
 
 }

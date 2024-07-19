@@ -1,14 +1,13 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Scroll } from '@angular/router';
 import { BackendService } from '../../_services/backend/backend.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
 import { IdeaComponent } from '../idea/idea.component';
 import { IdeasPaginationComponent } from '../ideas-pagination/ideas-pagination.component';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
-import Swal from 'sweetalert2'; 
 import { AuthService } from '../../_services/auth/auth.service';
 import { UserService } from '../../_services/user/user.service';
-import { window } from 'rxjs';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-ideas',
@@ -24,6 +23,8 @@ export class IdeasComponent implements OnInit{
   auth = inject(AuthService)
   ideasService = inject(IdeasService)
   router = inject(Router)
+
+  animateScroll = false; 
 
   ideasPerPage: number = 10; 
   ideasLength: number = 0; 
@@ -67,10 +68,6 @@ export class IdeasComponent implements OnInit{
     this.currentPage = page;
     this.updatePagedIdeas();
 
-    document.documentElement.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-    })
   }
 
   updatePagedIdeas() {
@@ -126,7 +123,15 @@ export class IdeasComponent implements OnInit{
   onIdeaDeleted(ideaID: string){
     // già aggiornato il service in Idea Component 
     this.ideas = this.ideasService.ideas()
+    // aggiornare localstorage 
+    this.updateLocalStorageOnIdeaDeleted(ideaID)
     this.updatePagedIdeas(); 
+  }
+
+  updateLocalStorageOnIdeaDeleted(ideaID: string){
+    const ideas = this.user.getIdeas(); 
+    const ideasUpdated = ideas.filter(idea => idea.ideaID != ideaID) 
+    localStorage.setItem("User-Ideas", JSON.stringify(ideasUpdated)); 
   }
 
 }
