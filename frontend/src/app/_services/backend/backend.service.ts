@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthRequest } from '../../_models/AuthRequest.type';
+import { AuthRequest } from '../../_models/authRequest.type';
 import { jwtDecode } from 'jwt-decode';
 import { LoginResponse } from '../../_models/LoginResponse.type';
 import { Idea } from '../../_models/Idea.type';

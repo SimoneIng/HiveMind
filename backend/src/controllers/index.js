@@ -1,4 +1,4 @@
-import AuthController from "./authController.js";
+import AuthController from "./AuthController.js";
 import CommentController from "./CommentController.js";
 import FeedbackController from "./FeedbackController.js";
 import IdeaController from "./IdeaController.js";
