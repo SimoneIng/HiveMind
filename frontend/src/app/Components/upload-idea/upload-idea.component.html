@@ -1,10 +1,12 @@
 
 
-<!-- idea-upload.component.html -->
 
-<section class="flex items-center justify-center h-full">
-    <div class="flex flex-col items-center max-w-[50vw]">
-        <p class="text-xl">Carica Nuova Idea...</p>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">Carica una nuova Idea...</h2>
+    </div>
+  
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
         <form [formGroup]="uploadIdeaForm" (ngSubmit)="uploadIdea()" method="post">
             <div class="my-4">
                 <label class="block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white">Titolo</label>
@@ -46,6 +48,8 @@
                                 </svg>       
                             </button>
                             <span class="sr-only">Italic</span>                           
+                        </div>
+                        <div class="flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4">
                             <button (click)="unOrderedListToggle()" type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"/>
@@ -59,23 +63,11 @@
                             </button>
                             <span class="sr-only">Code</span>
                         </div>
-                        <div class="flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4"/>
-                                </svg>                                  
-                            </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 9H8a5 5 0 0 0 0 10h9m4-10-4-4m4 4-4 4"/>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
                     <textarea #descriptionTextArea (keyup)="getSelectedText($event)" (touchend)="getSelectedText($event)" (mouseup)="getSelectedText($event)" formControlName="description" rows="12" 
-                        class="resize-none block w-full max-w-500px focus:outline-none px-0 text-sm text-gray-800 bg-white dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
+                        class="resize-none block w-full focus:outline-none px-0 text-sm text-gray-800 bg-white dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
                         placeholder="Descrizione..." wrap="soft">
                     </textarea>
                 </div>
@@ -84,7 +76,8 @@
                 class="inline-flex w-full justify-center items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-emerald-400 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-emerald-300">
                 Pubblica Idea
             </button>
-        </form>
-    </div>
-</section>
+        </form>     
   
+      
+    </div>
+</div>
