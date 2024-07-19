@@ -4,3 +4,46 @@
 @tailwind components; 
 @tailwind utilities; 
 
+.custom-swal {
+    width: 90%;
+    max-width: 500px;
+  }
+  
+@media (max-width: 600px) {
+    .custom-swal {
+      width: 75%;
+      max-width: 300px;
+    }
+}
+  
+@media (min-width: 1200px) {
+    .custom-swal {
+      width: 60%;
+      max-width: 800px;
+    }
+}
+
+.swal2-popup {
+    @apply bg-white text-gray-800;
+}
+  
+.swal2-title {
+    @apply text-2xl font-bold;
+}
+  
+.swal2-actions button {
+    @apply px-4 py-2 rounded;
+}
+  
+  /* Classi per il tema scuro */
+.dark .swal2-popup {
+    @apply bg-gray-800 text-white;
+}
+
+.dark .swal2-title {
+    @apply text-2xl font-bold;
+}
+
+.dark .swal2-actions button {
+    @apply px-4 py-2 rounded;
+}

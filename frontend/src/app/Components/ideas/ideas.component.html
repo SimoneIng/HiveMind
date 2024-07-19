@@ -1,29 +1,37 @@
 <div class="my-3 inline-flex rounded-md shadow-sm" role="group">
-  <button (click)="changeSortOption('MostControvert-Ideas')" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+  <button (click)="changeSortOption('MostControvert-Ideas')" type="button" 
+    class="px-4 py-2 text-xs sm:text-base font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-emerald-400 focus:z-10 focus:ring-2 focus:ring-emerald-400 focus:text-emerald-400 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-emerald-300 dark:hover:bg-gray-700 dark:focus:ring-emerald-300 dark:focus:text-emerald-300">
     Most Controverts
   </button>
-  <button (click)="changeSortOption('Mainstream-Ideas')" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+  <button (click)="changeSortOption('Mainstream-Ideas')" type="button" 
+    class="px-4 py-2 text-xs sm:text-base font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-emerald-400 focus:z-10 focus:ring-2 focus:ring-emerald-400 focus:text-emerald-400 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-emerald-300 dark:hover:bg-gray-700 dark:focus:ring-emerald-300 dark:focus:text-emerald-300">
     Mainstream Ideas
   </button>
-  <button (click)="changeSortOption('Unpopular-Ideas')" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+  <button (click)="changeSortOption('Unpopular-Ideas')" type="button" 
+   class="px-4 py-2 text-xs sm:text-base font-medium rounded-e-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-emerald-400 focus:z-10 focus:ring-2 focus:ring-emerald-400 focus:text-emerald-400 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-emerald-300 dark:hover:bg-gray-700 dark:focus:ring-emerald-300 dark:focus:text-emerald-300">
     Unpopulars Ideas
   </button>
 </div>
 
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+<div class="ideas grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 justify-center mb-10">
     @for (idea of this.pagedIdeas; track idea.ideaID) {
-        <app-idea [idea]="idea" 
+        <app-idea 
+           
+          [idea]="idea" 
           (ideaDeleted)="onIdeaDeleted($event)" 
         >
         </app-idea>
+    } @empty {
+        <div>
+          <p>Nessun'altra Idea</p>
+        </div>
     }
-    <app-ideas-pagination class="fixed bottom-5 left-1/2 transform -translate-x-1/2"
-      [totalItems]="this.ideas.length"
-      [pageItemsNumber]="this.ideasPerPage"
-      (pageChanged)="onPageChanged($event)"
-    >
-    </app-ideas-pagination>
 </div>
 
-
+<app-ideas-pagination class="absolute bottom-5 left-1/2 transform -translate-x-1/2"
+  [totalItems]="this.ideas.length"
+  [pageItemsNumber]="this.ideasPerPage"
+  (pageChanged)="onPageChanged($event)"
+  >
+</app-ideas-pagination>

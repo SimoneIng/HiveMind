@@ -39,7 +39,14 @@ export class LoginComponent {
         icon: "error",
         title: "Non hai inserito i dati correttamente",
         showConfirmButton: false, 
-        timer: 1500 
+        timer: 1500,
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          actions: 'swal2-actions',
+          confirmButton: 'swal2-confirm',
+          cancelButton: 'swal2-cancel'
+        }
       })
     } else {
       this.backend.login({
@@ -52,11 +59,19 @@ export class LoginComponent {
         },
         error: err => { 
           // messaggio di errore 
+          console.log(err);
           Swal.fire({
             icon: "error",
-            title: err?.message,
+            title: err?.error?.message,
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
         }, 
         complete: () => {
@@ -64,7 +79,14 @@ export class LoginComponent {
             icon: "success",
             title: "Hai effettuato il Login",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           });
           this.router.navigateByUrl('/Home')
         }

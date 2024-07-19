@@ -8,6 +8,7 @@ import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import Swal from 'sweetalert2'; 
 import { AuthService } from '../../_services/auth/auth.service';
 import { UserService } from '../../_services/user/user.service';
+import { window } from 'rxjs';
 
 @Component({
   selector: 'app-ideas',
@@ -41,8 +42,15 @@ export class IdeasComponent implements OnInit{
         console.log(err)
         Swal.fire({
           icon: "error",
-          title: "Errore nel caricare i dati, riprovare più tardi",
-          timer: 1500
+          title: err?.error?.message,
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
         this.auth.updateAuthStateOnLogout(); 
         this.user.updateUserOnLogout(); 
@@ -58,6 +66,11 @@ export class IdeasComponent implements OnInit{
   onPageChanged(page: number) {
     this.currentPage = page;
     this.updatePagedIdeas();
+
+    document.documentElement.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+    })
   }
 
   updatePagedIdeas() {

@@ -131,8 +131,16 @@ export class UploadIdeaComponent {
           Swal.fire({
             icon: "error",
             title: "Errore nel caricamento dell'idea..",
+            text: err?.error?.message, 
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
         }, 
         complete: () => {
@@ -140,7 +148,14 @@ export class UploadIdeaComponent {
             icon: "success",
             title: "Idea Caricata...",
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
         } 
       })

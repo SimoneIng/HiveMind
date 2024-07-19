@@ -13,9 +13,18 @@ export const authGuard: CanActivateFn = (route, state) => {
   } else {
     Swal.fire({
       icon: "error",
+      title: "Errore", 
       text: "Non sei Loggato", 
       showConfirmButton: false, 
-      timer: 1000
+      showCancelButton: false, 
+      timer: 1000, 
+      customClass: {
+        popup: 'swal2-popup',
+        title: 'swal2-title',
+        actions: 'swal2-actions',
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel'
+      }
     })
     return router.parseUrl("/Login")
   }

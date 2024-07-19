@@ -54,14 +54,28 @@ export class IdeaComponent {
             icon: "error",
             title: err?.error?.message,
             showConfirmButton: false, 
-            timer: 1500
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
       }, complete: () => {
           Swal.fire({
             icon: "success",
             title: "Hai inserito un Feedback",
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
       }
     })
@@ -85,14 +99,28 @@ export class IdeaComponent {
           icon: "error",
           title: err?.error?.message,
           showConfirmButton: false, 
-          timer: 1500 
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }, complete: () => {
           Swal.fire({
             icon: "success",
             title: "Idea Eliminata",
             showConfirmButton: false, 
-            timer: 1500 
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           })
           this.ideaDeleted.emit(this.idea.ideaID)
       }
@@ -108,7 +136,14 @@ export class IdeaComponent {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Cancella",
-      cancelButtonText: "Annulla"
+      cancelButtonText: "Annulla",
+      customClass: {
+        popup: 'swal2-popup',
+        title: 'swal2-title',
+        actions: 'swal2-actions',
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel'
+      }
     }).then((result) => {
       if (result.isConfirmed) {
         this.deleteIdea();

@@ -24,7 +24,14 @@ export class CommentComponent {
       Swal.fire({
         icon: "error",
         text: "Non puoi cancellare un commento non tuo..",
-        timer: 1500 
+        timer: 1500,
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          actions: 'swal2-actions',
+          confirmButton: 'swal2-confirm',
+          cancelButton: 'swal2-cancel'
+        }
       })
     } else {
       this.deleteCommentEvent.emit(this.comment.commentID); 

@@ -38,7 +38,14 @@ export class NavbarComponent {
       icon: "error",
       title: "Hai Effettuato il Logout",
       showConfirmButton: false,
-      timer: 2000
+      timer: 2000,
+      customClass: {
+        popup: 'swal2-popup',
+        title: 'swal2-title',
+        actions: 'swal2-actions',
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel'
+      }
     });
   }
 

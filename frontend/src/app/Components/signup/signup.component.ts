@@ -45,8 +45,16 @@ export class SignupComponent {
           // messaggio di errore 
           Swal.fire({
             icon: "error",
-            title: "Utente gia Registrato",
-            text: "Effettua il Login"
+            title: "Errore nella Registrazione", 
+            text: err?.error?.message,
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           });
         }, 
         complete: () => {
@@ -54,7 +62,14 @@ export class SignupComponent {
             icon: "success",
             title: "Ti sei Registrato",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              actions: 'swal2-actions',
+              confirmButton: 'swal2-confirm',
+              cancelButton: 'swal2-cancel'
+            }
           });
           this.loginAfterRegistration(); 
         }
@@ -76,8 +91,16 @@ export class SignupComponent {
         Swal.fire({
           icon: "error",
           title: "Riprova ad Accedere",
+          text: err?.error?.message, 
           showConfirmButton: false, 
-          timer: 1500 
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }, 
       complete: () => {

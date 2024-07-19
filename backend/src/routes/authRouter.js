@@ -12,7 +12,7 @@ const authRouter = express.Router();
                     user: authUser, token: AuthController.issueToken(authUser.userID)
             })
         } else {
-            next({status: 401, message: 'Invalid Credentials'})
+            next({statusCode: 401, message: 'Invalid Credentials'})
         }
     }) 
 

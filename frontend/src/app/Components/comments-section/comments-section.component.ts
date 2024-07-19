@@ -47,7 +47,14 @@ export class CommentsSectionComponent {
         Swal.fire({
           icon: "error", 
           text: "Errore nel caricamento del commento, riprovare più tardi...", 
-          timer: 1500
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }
     }
@@ -65,7 +72,14 @@ export class CommentsSectionComponent {
           icon: "error",
           title: err?.error?.message,
           showConfirmButton: false, 
-          timer: 1500
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }, 
       complete: () => {
@@ -73,7 +87,14 @@ export class CommentsSectionComponent {
           icon: "success",
           title: "Commento Caricato...",
           showConfirmButton: false, 
-          timer: 1500 
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }
     })
@@ -90,15 +111,29 @@ export class CommentsSectionComponent {
         Swal.fire({
           icon: "error", 
           text: err?.error?.message,
-          timer: 1500 
+          timer: 1500,
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }, 
       complete: () => {
         Swal.fire({
           icon: "success", 
           text: "Commento Cancellato",
+          showConfirmButton: false,
           timer: 1500, 
-          showConfirmButton: false
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            actions: 'swal2-actions',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
         })
       }
     })

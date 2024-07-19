@@ -5,13 +5,13 @@
                 <a routerLink="/Home">
                 <img src="assets/logo.png" class="w-9 h-9" alt="">                  
                 </a>
-                <a routerLink="/Home" class="font-semibold ml-2">HiveMind</a>
+                <a routerLink="/Home" class="font-bold ml-2 sm:text-lg text-lg text-gray-950 dark:text-white ">HiveMind</a>
             </div>
             <div class="hidden md:flex items-center">
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Home</a>
                 @if (auth.isAuthenticated()){
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/UploadIdea" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Upload Idea</a>
-                <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" (click)="handleLogout()" class="m-3 text-sm font-semibold hover:text-emerald-300">Logout</a>
+                <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" (click)="handleLogout()" class="m-3 font-semibold hover:text-emerald-300">Logout</a>
                 } @else {
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Login" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Login</a>
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/SignUp" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Sign Up</a>
@@ -41,7 +41,7 @@
             <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Home</a>
             @if(auth.isAuthenticated()){
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/UploadIdea" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Upload Idea</a>
-                <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" (click)="handleLogout()" class="m-3 text-sm font-semibold hover:text-emerald-300">Logout</a>
+                <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Home" (click)="handleLogout()" class="m-3 font-semibold hover:text-emerald-300">Logout</a>
             } @else {
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/Login" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Sign In</a>
                 <a (click)="closeMenuAfterLinkIsClicked()" routerLink="/SignUp" routerLinkActive="active" class="m-3 font-semibold hover:text-emerald-300">Sign Up</a>                
