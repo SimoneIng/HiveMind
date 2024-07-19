@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
 import { BackendService } from '../../_services/backend/backend.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
@@ -68,6 +68,7 @@ export class IdeasComponent implements OnInit{
     this.currentPage = page;
     this.updatePagedIdeas();
 
+    document.getElementById('scrollToElement')?.scrollIntoView({behavior: 'smooth'}); 
   }
 
   updatePagedIdeas() {

@@ -13,12 +13,14 @@ export class UserService {
     userID: this.getUserID(), 
     username: this.getUsername(), 
     ideas: this.getIdeas(),
-    profileImagePath: this.getProfileImagePath() 
+    profileImagePath: this.getProfileImagePath(),
+    profileCreatedAt: this.getProfileCreatedAt()
   })
 
   userID = computed(() => this.loggedUser().userID)
   username = computed(() => this.loggedUser().username)
   profileImagePath = computed(() => this.loggedUser().profileImagePath)
+  profileCreatedAt = computed(() => this.loggedUser().profileCreatedAt)
   ideas = computed(() => this.loggedUser().ideas)
 
   constructor(){
@@ -27,6 +29,7 @@ export class UserService {
       const ideas = this.loggedUser().ideas; 
       const userID = this.loggedUser().userID; 
       const profileImagePath = this.loggedUser().profileImagePath; 
+      const profileCreatedAt = this.loggedUser().profileCreatedAt; 
 
       if(username != null){
         localStorage.setItem("Username", username)
@@ -52,7 +55,21 @@ export class UserService {
         localStorage.removeItem("ProfileImagePath")
       }
 
+      if(profileCreatedAt != null){
+        localStorage.setItem("ProfileCreatedAt", profileCreatedAt.toISOString())
+      } else {
+        localStorage.removeItem("ProfileCreatedAt")
+      }
+
     })
+  }
+
+  getProfileCreatedAt(){
+    const dateString = localStorage.getItem('ProfileCreatedAt'); 
+    if(dateString) {
+      const date = new Date(dateString); 
+      return date; 
+    } else return null;
   }
 
   getProfileImagePath(){
@@ -79,7 +96,8 @@ export class UserService {
       userID: httpResponse.user.userID, 
       username: httpResponse.user.userName, 
       profileImagePath: httpResponse.user.profileImagePath,  
-      ideas: httpResponse.user.Ideas,
+      profileCreatedAt: httpResponse.user.profileCreatedAt,  
+      ideas: httpResponse.user.Ideas 
     })
   }
 
@@ -88,6 +106,7 @@ export class UserService {
       userID: null, 
       username: null, 
       profileImagePath: null, 
+      profileCreatedAt: null, 
       ideas: null 
     })
   }

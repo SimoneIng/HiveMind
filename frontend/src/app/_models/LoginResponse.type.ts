@@ -7,6 +7,7 @@ export interface LoginResponse {
         userID: string, 
         userName: string, 
         profileImagePath: string, 
+        profileCreatedAt: Date,
         Ideas: IdeaExtended [] 
     }, 
     token: string 

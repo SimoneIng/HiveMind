@@ -19,7 +19,12 @@ const User = {
         type: DataTypes.TEXT,
         allowNull: false, 
         defaultValue: '' 
-    }  
+    }, 
+    profileCreatedAt: {
+        type: DataTypes.TEXT, 
+        allowNull: false, 
+        defaultValue: Date.now()
+    }
 }
 
 export default User 

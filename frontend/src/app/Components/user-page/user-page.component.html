@@ -1,6 +1,6 @@
 
 
-<section class="h-full m-3">
+<section class="h-full">
 
     <!-- User Details... -->
     <div class="flex justify items-center justify-between">
@@ -12,7 +12,13 @@
                     </div>
                     <div class="font-medium dark:text-white">
                         <div>{{userService.getUsername()}}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Joined in ....</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            @if(this.profileCreatedAt){
+                                Profilo Creato il: {{this.profileCreatedAt| date:'dd/MM/yyyy H:mm' }}
+                            } @else {
+                                Profilo Creato il: ... 
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,7 +28,7 @@
     <!-- User Report... -->
     <div class="flex flex-col sm:flex-row sm:text-base text-sm m-5">
         <div class="m-1">
-            Idee Caricate: {{userIdeas.length}}
+            Idee: {{userIdeas.length}}
         </div>
         <div class="m-1 flex">
             Upvotes: <p class="ml-1 text-emerald-400 dark:text-emerald-300">{{userUpvotes}}</p>
@@ -42,10 +48,10 @@
                 </button>
             </div>
         } @else {
-            <div class="sm:text-2xl text-lg">
+            <div class="sm:text-2xl text-lg ml-3">
                 Le tue Idee
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                 @for (idea of this.userIdeas; track idea.ideaID) {
                     <app-idea 
                         [idea]="idea"
