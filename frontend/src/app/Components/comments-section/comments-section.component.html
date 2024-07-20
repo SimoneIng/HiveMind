@@ -10,7 +10,7 @@
       <app-comment [comment]="comment" (deleteCommentEvent)="deleteComment($event)"></app-comment>
     }
     @empty {
-      <p>Ancora Nessun Commento...</p>
+      <p class="text-base">Ancora Nessun Commento...</p>
     }
   </div>
   
@@ -22,7 +22,7 @@
     </svg> 
     <textarea
     formControlName="commentText"
-    class="flex-1 border-none rounded-lg p-2 resize-none outline-none text-sm bg-gray-600 mx-2"
+    class="flex-1 border-none rounded-lg p-2 resize-none outline-none text-sm bg-slate-50 dark:bg-gray-600 mx-2"
     rows="1"
     placeholder="Add a comment..."
     ></textarea>
