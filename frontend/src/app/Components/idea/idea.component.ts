@@ -1,5 +1,6 @@
 import { Component, Input, inject, computed, Output, EventEmitter } from '@angular/core';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
+import { Router } from '@angular/router';
 import { UserService } from '../../_services/user/user.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ export class IdeaComponent {
   @Input({required: true}) idea: IdeaExtended; 
   @Output() ideaDeleted: EventEmitter<string> = new EventEmitter<string>() 
 
+  router = inject(Router);
   user = inject(UserService)
   backend = inject(BackendService)
   ideasService = inject(IdeasService)
@@ -182,6 +184,11 @@ export class IdeaComponent {
     this.ideasService.updateIdea(this.idea); 
 
     // update localstorage se il commento eliminato è su un idea del user loggato 
+  }
+
+
+  goToIdeaPage(){
+    this.router.navigate(['/IdeaPage'], {state: this.idea})
   }
 
 }

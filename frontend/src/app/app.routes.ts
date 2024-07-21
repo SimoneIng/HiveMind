@@ -5,6 +5,7 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { UploadIdeaComponent } from './Components/upload-idea/upload-idea.component';
 import { UserPageComponent } from './Components/user-page/user-page.component';
 import { authGuard } from './_guards/AuthGuard/auth.guard';
+import { IdeaPageComponent } from './Components/idea-page/idea-page.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +38,12 @@ export const routes: Routes = [
         path:'UserProfile',
         component: UserPageComponent,
         title: 'User Page',
+        canActivate: [authGuard]
+    },
+    {
+        path: "IdeaPage", 
+        component: IdeaPageComponent, 
+        title: 'Idea Page', 
         canActivate: [authGuard]
     }
 ];
