@@ -12,6 +12,7 @@ import { CommentsSectionComponent } from "../comments-section/comments-section.c
 import { Comment } from '../../_models/Comment.type';
 import { CommentSectionService } from '../../_services/commentSection/comment-section.service';
 import { MarkdownComponent } from 'ngx-markdown';
+import { User } from '../../_models/User.type';
 
 @Component({
   selector: 'app-idea',
@@ -189,6 +190,17 @@ export class IdeaComponent {
 
   goToIdeaPage(){
     this.router.navigate(['/IdeaPage'], {state: this.idea})
+  }
+
+  goToUserPage(){
+    const user: User = {
+      userID: this.idea.userID,
+      username: this.idea.User.userName, 
+      profileCreatedAt: this.idea.User.profileCreatedAt, 
+      profileImagePath: this.idea.User.profileImagePath,   
+      ideas: this.ideasService.ideas().filter(idea => idea.userID === this.idea.userID)
+    }
+    this.router.navigate(['/UserPage'], {state: user})
   }
 
 }

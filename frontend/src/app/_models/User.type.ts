@@ -4,6 +4,6 @@ export interface User {
     userID: string | null, 
     username: string | null, 
     profileImagePath: string | null, 
-    ideas: IdeaExtended[] | null,
-    profileCreatedAt: Date | null 
+    profileCreatedAt: Date | null, 
+    ideas: IdeaExtended[] 
 }

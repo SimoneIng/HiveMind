@@ -12,21 +12,19 @@ export class UserService {
   loggedUser: WritableSignal<User> = signal<User>({
     userID: this.getUserID(), 
     username: this.getUsername(), 
-    ideas: this.getIdeas(),
+    ideas: [],
     profileImagePath: this.getProfileImagePath(),
-    profileCreatedAt: this.getProfileCreatedAt()
+    profileCreatedAt: this.getProfileCreatedAt() 
   })
 
   userID = computed(() => this.loggedUser().userID)
   username = computed(() => this.loggedUser().username)
   profileImagePath = computed(() => this.loggedUser().profileImagePath)
   profileCreatedAt = computed(() => this.loggedUser().profileCreatedAt)
-  ideas = computed(() => this.loggedUser().ideas)
 
   constructor(){
     effect(() => {
       const username = this.loggedUser().username; 
-      const ideas = this.loggedUser().ideas; 
       const userID = this.loggedUser().userID; 
       const profileImagePath = this.loggedUser().profileImagePath; 
       const profileCreatedAt = this.loggedUser().profileCreatedAt; 
@@ -43,12 +41,6 @@ export class UserService {
         localStorage.removeItem("UserID")
       }
 
-      if(ideas != null){
-        localStorage.setItem("User-Ideas", JSON.stringify(ideas)); 
-      } else {
-        localStorage.removeItem("User-Ideas")
-      }
-
       if(profileImagePath != null){
         localStorage.setItem('ProfileImagePath', profileImagePath)
       } else {
@@ -56,7 +48,8 @@ export class UserService {
       }
 
       if(profileCreatedAt != null){
-        localStorage.setItem("ProfileCreatedAt", profileCreatedAt.toISOString())
+        const dateString = profileCreatedAt.toISOString(); 
+        localStorage.setItem("ProfileCreatedAt", dateString);
       } else {
         localStorage.removeItem("ProfileCreatedAt")
       }
@@ -65,11 +58,9 @@ export class UserService {
   }
 
   getProfileCreatedAt(){
-    const dateString = localStorage.getItem('ProfileCreatedAt'); 
-    if(dateString) {
-      const date = new Date(dateString); 
-      return date; 
-    } else return null;
+    const dateString = localStorage.getItem("ProfileCreatedAt");
+    if(dateString) return new Date(dateString); 
+    return null 
   }
 
   getProfileImagePath(){
@@ -82,12 +73,6 @@ export class UserService {
 
   getUsername(){
     return localStorage.getItem("Username")
-  }
-
-  getIdeas(){
-    const ideas = localStorage.getItem("User-Ideas"); 
-    if(ideas != null) return JSON.parse(ideas) as IdeaExtended[]; 
-    else return []; 
   }
 
   updateUserOnLogin(httpResponse: LoginResponse): void {
@@ -107,7 +92,7 @@ export class UserService {
       username: null, 
       profileImagePath: null, 
       profileCreatedAt: null, 
-      ideas: null 
+      ideas: []
     })
   }
 

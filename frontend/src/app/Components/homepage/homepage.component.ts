@@ -15,8 +15,6 @@ export class HomepageComponent {
 
   authService = inject(AuthService)
   userService = inject(UserService)
-
-  userIdeas = this.userService.ideas() 
   
   
 }

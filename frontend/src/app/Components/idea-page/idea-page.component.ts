@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { Comment } from '../../_models/Comment.type';
 import { CommentComponent } from '../comment/comment.component';
+import { CommentsSectionComponent } from '../comments-section/comments-section.component';
 
 @Component({
   selector: 'app-idea-page',
   standalone: true,
-  imports: [CommonModule, MarkdownModule, CommentComponent],
+  imports: [CommonModule, MarkdownModule, CommentsSectionComponent, CommentComponent],
   templateUrl: './idea-page.component.html',
   styleUrl: './idea-page.component.scss'
 })

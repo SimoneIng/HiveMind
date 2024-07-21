@@ -21,7 +21,7 @@ const User = {
         defaultValue: '' 
     }, 
     profileCreatedAt: {
-        type: DataTypes.TEXT, 
+        type: DataTypes.DATE, 
         allowNull: false, 
         defaultValue: Date.now()
     }

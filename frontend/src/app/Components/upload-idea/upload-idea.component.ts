@@ -68,14 +68,6 @@ export class UploadIdeaComponent {
     this.replaceSelectedText(`\' ${this.selectedText} \'`)
   }
 
-  undoAction(){
-
-  }
-
-  redoAction(){
-    
-  }
-
   getSelectedText(event: Event){
     let selection = window.getSelection(); 
     let text = selection?.toString().trim();
@@ -103,19 +95,6 @@ export class UploadIdeaComponent {
       textarea.selectionEnd = start + newText.length;
     }
   }
-
-  updateLocalStorageOnIdeaUploaded(response: GenericResponse){
-    const ideas = this.userService.getIdeas(); 
-    const newIdea = {
-      ...response.data as Idea , 
-      User: {
-        userName: this.userService.getUsername(),
-        profileImagePath: this.userService.getProfileImagePath()
-      }, Comments: [], Feedbacks: [], 
-    }
-    ideas.push(newIdea); 
-    localStorage.setItem("User-Ideas", JSON.stringify(ideas)); 
-  }
   
   uploadIdea() {
     if(!this.uploadIdeaForm.invalid){
@@ -124,8 +103,7 @@ export class UploadIdeaComponent {
       this.backendService.postIdea(title, description).subscribe({
         next: (response) => {
           console.log(response)
-          // aggiornare il localStorage 
-          this.updateLocalStorageOnIdeaUploaded(response); 
+          
         },
         error: err => {
           Swal.fire({

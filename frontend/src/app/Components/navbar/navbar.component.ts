@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { AuthService } from '../../_services/auth/auth.service';
 import { UserService } from '../../_services/user/user.service';
 import Swal from 'sweetalert2';
 import { FeedbacksService } from '../../_services/feedbacks/feedbacks.service';
+import { IdeasService } from '../../_services/ideas/ideas.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,8 @@ import { FeedbacksService } from '../../_services/feedbacks/feedbacks.service';
 export class NavbarComponent {
 
   navbarIsOpen:boolean = false;
+  router = inject(Router);
+  ideasService = inject(IdeasService)
   auth = inject(AuthService); 
   user = inject(UserService); 
   feedbacksService = inject(FeedbacksService); 
@@ -26,6 +29,14 @@ export class NavbarComponent {
   
   closeMenuAfterLinkIsClicked(){
     if(this.navbarIsOpen) this.navbarIsOpen = !this.navbarIsOpen; 
+  }
+
+  goToUserPage(){
+    const user = this.user.loggedUser(); 
+    user.ideas = this.ideasService.ideas().filter(idea => idea.userID === user.userID)
+    this.closeMenuAfterLinkIsClicked()
+
+    this.router.navigate(['/UserPage'], {state: user})
   }
 
   handleLogout(){

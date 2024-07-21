@@ -1,10 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../_services/auth/auth.service';
-import { UserService } from '../../_services/user/user.service';
 import { IdeaComponent } from '../idea/idea.component';
 import { RouterLink } from '@angular/router';
 import { IdeaExtended } from '../../_models/IdeaExtended.type';
+import { User } from '../../_models/User.type';
+import { Router } from '@angular/router';
+import { IdeasService } from '../../_services/ideas/ideas.service';
 
 @Component({
   selector: 'app-user-page',
@@ -15,30 +17,25 @@ import { IdeaExtended } from '../../_models/IdeaExtended.type';
 })
 export class UserPageComponent {
 
-  authService = inject(AuthService); 
-  userService = inject(UserService); 
+  router = inject(Router);
 
-  userIdeas: IdeaExtended [] = []; 
-  userUpvotes: number = 0; 
-  userDownvotes: number = 0;  
-  profileCreatedAt: Date | null; 
+  user: User;   
+  upvotes: number = 0; 
+  downvotes: number = 0; 
 
-  ngOnInit(){
-    this.userIdeas = this.userService.getIdeas(); 
-    console.log(this.userIdeas)
+  constructor(){
+    this.user = this.router.getCurrentNavigation()?.extras.state as User; 
+    console.log(this.user)
 
-    this.profileCreatedAt = this.userService.profileCreatedAt(); 
-
-    this.userIdeas.forEach(idea => {
-      this.userUpvotes += idea.upVotes; 
-      this.userDownvotes += idea.downVotes; 
-    }); 
-
+    // calcolo Upvotes e DownVotes totali 
+    this.user.ideas.forEach(idea => {
+      this.upvotes += idea.upVotes;
+      this.downvotes += idea.downVotes;
+    })
   }
 
-  onIdeaDeleted(ideaID: string){
-    this.userIdeas = this.userIdeas.filter(idea => idea.ideaID != ideaID); 
-    localStorage.setItem("User-Ideas", JSON.stringify(this.userIdeas))
+  onIdeaDeleted(ideaID: string){ // aggiorna il model della schermata corrente 
+    this.user.ideas = this.user.ideas.filter(idea => idea.ideaID !== ideaID);
   }
 
 }

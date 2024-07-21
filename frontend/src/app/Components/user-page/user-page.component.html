@@ -11,10 +11,10 @@
                      <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     </div>
                     <div class="font-medium dark:text-white">
-                        <div>{{userService.getUsername()}}</div>
+                        <div>{{user.username}}</div>
                         <div class="text-sm text-gray-500 dark:text-gray-400">
-                            @if(this.profileCreatedAt){
-                                Profilo Creato il: {{this.profileCreatedAt| date:'dd/MM/yyyy H:mm' }}
+                            @if(user.profileCreatedAt){
+                                Profilo Creato il: {{user.profileCreatedAt| date:'dd/MM/yyyy H:mm' }}
                             } @else {
                                 Profilo Creato il: ... 
                             }
@@ -28,20 +28,20 @@
     <!-- User Report... -->
     <div class="flex flex-col sm:flex-row sm:text-base text-sm m-5">
         <div class="m-1">
-            Idee: {{userIdeas.length}}
+            Idee: {{user.ideas.length}}
         </div>
         <div class="m-1 flex">
-            Upvotes: <p class="ml-1 text-emerald-400 dark:text-emerald-300">{{userUpvotes}}</p>
+            Upvotes: <p class="ml-1 text-emerald-400 dark:text-emerald-300">{{upvotes}}</p>
         </div>
         <div class="m-1 flex">
-            Downvotes: <p class="ml-1 text-red-400 dark:text-red-300">{{userDownvotes}}</p> 
+            Downvotes: <p class="ml-1 text-red-400 dark:text-red-300">{{downvotes}}</p> 
         </div>
     </div> 
 
 
     <!-- User Current Ideas.... -->
     <div>
-        @if(this.userIdeas.length == 0) {
+        @if(user.ideas.length == 0) {
             <div class="w-full flex justify-center items-center">
                 <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-emerald-400 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-emerald-300">
                     <a routerLink="/UploadIdea">Carica la tua Prima Idea</a>
@@ -52,7 +52,7 @@
                 Le tue Idee
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-                @for (idea of this.userIdeas; track idea.ideaID) {
+                @for (idea of this.user.ideas; track idea.ideaID) {
                     <app-idea 
                         [idea]="idea"
                         (ideaDeleted)="onIdeaDeleted($event)"

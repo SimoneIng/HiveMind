@@ -124,15 +124,7 @@ export class IdeasComponent implements OnInit{
   onIdeaDeleted(ideaID: string){
     // già aggiornato il service in Idea Component 
     this.ideas = this.ideasService.ideas()
-    // aggiornare localstorage 
-    this.updateLocalStorageOnIdeaDeleted(ideaID)
     this.updatePagedIdeas(); 
-  }
-
-  updateLocalStorageOnIdeaDeleted(ideaID: string){
-    const ideas = this.user.getIdeas(); 
-    const ideasUpdated = ideas.filter(idea => idea.ideaID != ideaID) 
-    localStorage.setItem("User-Ideas", JSON.stringify(ideasUpdated)); 
   }
 
 }
