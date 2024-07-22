@@ -37,7 +37,11 @@
     <div class="flex flex-col my-4">
         <p>Commenti</p>
         @for(comment of idea.Comments; track comment.commentID){
-            <app-comment [comment]="comment"></app-comment>
+            <app-comment 
+                [comment]="comment"
+                (deleteCommentEvent)="deleteComment($event)"
+                >
+            </app-comment>
         } @empty {
             <div class="flex justify-center items-center mt-3">
                 <p>Nessun commento..</p>
@@ -45,6 +49,26 @@
         }
     </div>
     
-    </div>
+    <!-- Form caricamento Commento -->
+    <form [formGroup]="commentForm" (ngSubmit)="postNewCommentAction()" class="w-[80vw] absolute bottom-5 left-1/2 transform -translate-x-1/2">
+        <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                <label for="comment" class="sr-only">Your comment</label>
+                <textarea formControlName="commentText" rows="3" 
+                    class="w-full px-0 text-sm focus:outline-none text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
+                    placeholder="Add a comment..." required >
+                </textarea>
+            </div>
+            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                <button 
+                    type="submit" 
+                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-emerald-400 rounded-lg hover:bg-emerald-400"
+                    [disabled]="commentForm.invalid"
+                    >
+                    Carica Commento
+                </button>
+            </div>
+        </div>
+    </form>    
 
 </div>

@@ -91,7 +91,7 @@ export class IdeaComponent {
       text: "Stai per cancellare la tua Idea",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#34d399",
       cancelButtonColor: "#d33",
       confirmButtonText: "Cancella",
       cancelButtonText: "Annulla",
@@ -129,17 +129,12 @@ export class IdeaComponent {
     this.idea.Comments.push(newComment); 
     this.idea.commentsNumber++; 
     this.ideasService.updateIdea(this.idea); 
-
-    // update localstorage se il commento creato è su un idea del user loggato
   }
 
   updateIdeaAfterCommentDeleted(commentID: string){
-    const index = this.idea.Comments.findIndex(comment => comment.commentID == commentID)
-    if(index !== -1) this.idea.Comments.splice(index, 1); 
+    this.idea.Comments = this.idea.Comments.filter(comment => comment.commentID !== commentID)
     this.idea.commentsNumber--; 
     this.ideasService.updateIdea(this.idea); 
-
-    // update localstorage se il commento eliminato è su un idea del user loggato 
   }
 
 

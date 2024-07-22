@@ -44,7 +44,8 @@ export class FeedbackComponent implements OnInit {
         console.log(err) 
           Swal.fire({
             icon: "error",
-            title: err?.error?.message,
+            title: "Errore", 
+            text: err?.error?.message,
             showConfirmButton: false, 
             timer: 1500,
             customClass: {
