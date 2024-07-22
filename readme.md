@@ -67,6 +67,17 @@ visualizzare i commenti lasciati da altri utenti nella pagina di dettaglio di ci
 
     `\c hivemind` then `CREATE SCHEMA app;` 
 
+### Setup Backend 
+
+1. Move to backend Directory 
+
+    `cd backend`
+2. Run 
+
+    `npm install` to install all the dependencies. 
+
+3. Create a .env file and copy the code below 
+
 ```
 DB_NAME = "hivemind"
 DB_USER = "postgres"
@@ -79,21 +90,13 @@ JWT_SECRET = "84e94c6798ba4d9fdea2caff95c167937c6ea7a42be5dbb368ed870c66c7ede4ac
 046d08fe57e459b13df54f4ef14e255981e6e4c01116ea5b1e7afaa8cbc7"
 ```
 
-### Setup Backend 
-
-1. Move to backend Directory 
-
-    `cd backend`
-2. Run 
-
-    `npm install` to install all the dependencies. 
-3. Run 
-
-    `npm run dbsetup` to setup the database. 
 4. Run 
 
+    `npm run dbsetup` to setup the database. 
+5. Run 
+
     `npm run filldb` to create some users and ideas.
-5. Now you can finally run the server with 
+6. Now you can finally run the server with 
 
     `npm run start`. 
 
