@@ -36,7 +36,7 @@ export class NavbarComponent {
     user.ideas = this.ideasService.ideas().filter(idea => idea.userID === user.userID)
     this.closeMenuAfterLinkIsClicked()
     console.log(user);
-    this.router.navigate(['/UserPage'], {state: user})
+    this.router.navigate(['/UserPage', user.userID], {state: user})
   }
 
   handleLogout(){
