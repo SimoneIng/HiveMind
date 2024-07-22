@@ -7,11 +7,12 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CommentComponent } from '../comment/comment.component';
 import { CommentsSectionComponent } from '../comments-section/comments-section.component';
 import { IdeasService } from '../../_services/ideas/ideas.service';
+import { FeedbackComponent } from '../feedback/feedback.component';
 
 @Component({
   selector: 'app-idea-page',
   standalone: true,
-  imports: [CommonModule, MarkdownModule, CommentsSectionComponent, CommentComponent],
+  imports: [CommonModule, MarkdownModule, CommentsSectionComponent, CommentComponent, FeedbackComponent],
   templateUrl: './idea-page.component.html',
   styleUrl: './idea-page.component.scss'
 })

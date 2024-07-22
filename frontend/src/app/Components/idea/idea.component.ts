@@ -13,11 +13,12 @@ import { Comment } from '../../_models/Comment.type';
 import { CommentSectionService } from '../../_services/commentSection/comment-section.service';
 import { MarkdownComponent } from 'ngx-markdown';
 import { User } from '../../_models/User.type';
+import { FeedbackComponent } from "../feedback/feedback.component";
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [CommonModule, RouterLink, CommentsSectionComponent, MarkdownComponent],
+  imports: [CommonModule, RouterLink, CommentsSectionComponent, MarkdownComponent, FeedbackComponent],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
@@ -34,54 +35,8 @@ export class IdeaComponent {
 
   isCommentsSectionOpen: boolean = false; 
 
-  upvoteIsSet = computed(() => this.feedbacksService.getUpvoteFeedback(this.idea.ideaID))
-  downvoteIsSet = computed(() => this.feedbacksService.getDownVoteFeedback(this.idea.ideaID))
-
   ngOnInit(){
-      const userFeedback = this.idea.Feedbacks.find(feedback => feedback.userID == this.user.userID())
-      if(userFeedback){
-        this.feedbacksService.addFeedback(userFeedback.ideaID, userFeedback.flag)
-      }
-  }
-    
-  setFeedback(value: boolean){
-    this.backend.postFeedback(this.idea.ideaID, value).subscribe({
-      next: (response) => {
-        console.log("ciao", response)
-        value ? this.idea.upVotes++ : this.idea.downVotes++;
-        this.ideasService.updateIdea(this.idea)
-        this.feedbacksService.addFeedback(this.idea.ideaID, value)
-      }, error: err => {
-        console.log(err) 
-          Swal.fire({
-            icon: "error",
-            title: err?.error?.message,
-            showConfirmButton: false, 
-            timer: 1500,
-            customClass: {
-              popup: 'swal2-popup',
-              title: 'swal2-title',
-              actions: 'swal2-actions',
-              confirmButton: 'swal2-confirm',
-              cancelButton: 'swal2-cancel'
-            }
-          })
-      }, complete: () => {
-          Swal.fire({
-            icon: "success",
-            title: "Hai inserito un Feedback",
-            showConfirmButton: false, 
-            timer: 1500,
-            customClass: {
-              popup: 'swal2-popup',
-              title: 'swal2-title',
-              actions: 'swal2-actions',
-              confirmButton: 'swal2-confirm',
-              cancelButton: 'swal2-cancel'
-            }
-          })
-      }
-    })
+
   }
   
   showDeleteButton(){
