@@ -1,5 +1,5 @@
-import { Component, computed, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { Router, Scroll } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BackendService } from '../../_services/backend/backend.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
 import { IdeaComponent } from '../idea/idea.component';
