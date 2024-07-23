@@ -33,7 +33,7 @@ export class IdeaPageComponent {
 
   commentForm = new FormGroup({
     commentText: new FormControl('',
-      [Validators.minLength(2), Validators.maxLength(70)]), 
+      [Validators.minLength(3), Validators.maxLength(70)]), 
   }) 
 
   goToUserPage(){

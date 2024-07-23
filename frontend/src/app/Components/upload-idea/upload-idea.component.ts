@@ -3,12 +3,9 @@ import { UserService } from '../../_services/user/user.service';
 import { IdeasService } from '../../_services/ideas/ideas.service';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { BackendService } from '../../_services/backend/backend.service';
-import { IdeaExtended } from '../../_models/IdeaExtended.type';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MarkdownModule } from 'ngx-markdown';
-import { Idea } from '../../_models/Idea.type';
-import { GenericResponse } from '../../_models/GenericResponse.type';
 
 @Component({
   selector: 'app-upload-idea',
