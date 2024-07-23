@@ -60,7 +60,7 @@ Università degli Studi di Napoli Federico II, Corso di Laurea Triennale in Info
 ```
 DB_NAME = "hivemind"
 DB_USER = "postgres"
-DB_PSW = "<postgres password you chosen earlier>"
+DB_PSW = "admin" 
 DB_PORT = "5432"
 DB_SCHEMA = "app"
 HOST = "localhost"
