@@ -150,7 +150,7 @@ export class IdeaComponent {
       profileImagePath: this.idea.User.profileImagePath,   
       ideas: this.ideasService.ideas().filter(idea => idea.userID === this.idea.userID)
     }
-    this.router.navigate(['/UserPage'], {state: user})
+    this.router.navigate(['/UserPage', user.userID], {state: user})
   }
 
 }
