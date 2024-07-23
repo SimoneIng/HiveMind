@@ -28,7 +28,7 @@ export class IdeaPageComponent {
 
   constructor () {
     this.idea = this.router.getCurrentNavigation()?.extras.state as IdeaExtended; 
-    console.log(this.idea)
+
   }
 
   commentForm = new FormGroup({
